@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const environment = {
   development: {
     isProduction: false
@@ -15,18 +17,18 @@ module.exports = Object.assign({
     googleAnalytics: {
       appId: process.env.GOOGLE_ANALYTIC_ID || 'UA-XXXXXXXX-X'
     },
-    title: 'React Realty',
-    description: 'React Realty MVP',
+    title: process.env.APP_TITLE || 'React Realty',
+    description: process.env.APP_DESCRIPTION || 'React Realty MVP',
     head: {
-      titleTemplate: 'React Realty',
+      titleTemplate: process.env.APP_TITLE || 'React Realty',
       meta: [
-        { name: 'description', content: 'React Realty MVP' },
+        { name: 'description', content: process.env.APP_DESCRIPTION || 'React Realty MVP' },
         { charset: 'utf-8' },
-        { property: 'og:site_name', content: 'React Realty' },
+        { property: 'og:site_name', content: process.env.APP_TITLE || 'React Realty' },
         { property: 'og:image', content: 'https://facebook.github.io/react/img/logo_og.png' },
         { property: 'og:locale', content: 'en_US' },
-        { property: 'og:title', content: 'React Realty' },
-        { property: 'og:description', content: 'React Realty MVP' },
+        { property: 'og:title', content: process.env.APP_TITLE || 'React Realty' },
+        { property: 'og:description', content: process.env.APP_DESCRIPTION || 'React Realty MVP' },
         { property: 'og:card', content: 'summary' },
         { property: 'og:site', content: '' },
         { property: 'og:creator', content: '' },
