@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import styles from './App.scss'; // eslint-disable-line
 
 class App extends Component {
   render() {
-    const { children, inputValue } = this.props;
+    const { children } = this.props;
     return (
       <div className={styles.app}>
         <Helmet
@@ -18,5 +18,9 @@ class App extends Component {
       );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.node
+};
 
 export default App;

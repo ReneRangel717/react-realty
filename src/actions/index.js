@@ -1,9 +1,8 @@
-
 const REQUEST = 'REQUEST';
 const SUCCESS = 'SUCCESS';
 const FAILURE = 'FAILURE';
 
-function createRequestTypes(base) {
+function createRequestTypes(base) { //eslint-disable-line
   const res = {};
   //eslint-disable-next-line
   [REQUEST, SUCCESS, FAILURE].forEach(type => res[type] = `${base}_${type}`);

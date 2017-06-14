@@ -1,4 +1,4 @@
-import { schema, normalize } from 'normalizr';
+import { normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import 'isomorphic-fetch';
 import config from 'config';
@@ -23,7 +23,7 @@ const PROXY_ROOT = '/api';
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-function callApi(endpoint, entitySchema) {
+function callApi(endpoint, entitySchema) { // eslint-disable-line
   let fullUrl = (endpoint.indexOf(PROXY_ROOT) === -1) ? `${PROXY_ROOT}/${endpoint}` : endpoint;
 
   // If request comes from server side, call API url directly.

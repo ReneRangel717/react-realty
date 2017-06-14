@@ -73,6 +73,9 @@ module.exports = {
       './src/client.js'
     ]
   },
+  node: {
+    fs: 'empty'
+  },
   output: {
     path: assetsPath,
     filename: '[name]-[hash].js',

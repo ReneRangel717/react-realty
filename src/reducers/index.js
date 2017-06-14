@@ -1,5 +1,4 @@
 import * as ActionTypes from '../actions';
-import merge from 'lodash/merge';
 import { combineReducers } from 'redux';
 
 function router(state = { pathname: '/' }, action) {

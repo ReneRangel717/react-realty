@@ -27,6 +27,9 @@ module.exports = {
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/dist/'
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel']},

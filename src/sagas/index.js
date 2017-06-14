@@ -1,6 +1,5 @@
 /* eslint-disable no-constant-condition */
-import { take, put, call, fork, select } from 'redux-saga/effects';
-import { api, history } from '../services';
+import { take, put, call, fork } from 'redux-saga/effects';
 import * as actions from '../actions';
 
 /**
@@ -12,7 +11,7 @@ import * as actions from '../actions';
 // apiFn  : api.fetchUser | api.fetchRepo | ...
 // id     : login | fullName
 // url    : next page url. If not provided will use pass it to apiFn
-function* fetchEntity(entity, apiFn, id, url) {
+function* fetchEntity(entity, apiFn, id, url) { // eslint-disable-line
   yield put(entity.request(id));
   const { response, error } = yield call(apiFn, url || id);
   if (response) {
