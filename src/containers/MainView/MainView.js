@@ -1,39 +1,46 @@
-import React, { Component, PropTypes } from 'react';
-import GoogleMapReact from 'google-map-react';
-import styles from './MainView.scss'; // eslint-disable-line
+import React, { PropTypes, Component } from 'react';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>; // eslint-disable-line
+import MainViewLayout from './MainViewLayout';
+import PropertyMap from '../../components/PropertyMap';
+import { Connector, bindActionCreators } from 'redux';
 
-class MainView extends Component {
-  static defaultProps = {
-    center: { lat: 59.95, lng: 30.33 },
-    zoom: 11
+import * as allMapActions from '../../actions/mapActions';
+
+// slice actions to support map and table interfaces
+const mapActions = (({ changeBounds: onBoundsChange, markerHoverIndexChange: onMarkerHover, showBallon: onChildClick }) => ({
+  onBoundsChange, onMarkerHover, onChildClick
+}))(allMapActions);
+
+export default class MainView extends Component {
+  static propTypes = {
+    layout: PropTypes.string
   };
+
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
+  _renderMap() {
+    return (
+      <Connector
+        select={state => ({
+          center: state.map.get('mapInfo').get('center'),
+          zoom: state.map.get('mapInfo').get('zoom'),
+          markers: state.map.get('dataFiltered'),
+          visibleRowFirst: state.map.get('tableRowsInfo').get('visibleRowFirst'),
+          visibleRowLast: state.map.get('tableRowsInfo').get('visibleRowLast'),
+          maxVisibleRows: state.map.get('tableRowsInfo').get('maxVisibleRows'),
+          hoveredRowIndex: state.map.get('tableRowsInfo').get('hoveredRowIndex'),
+          openBallonIndex: state.map.get('openBalloonIndex')
+        })}
+      >
+        {({ dispatch, ...mapProps }) => (<PropertyMap {...mapProps} {...bindActionCreators(mapActions, dispatch)} />)}
+      </Connector>
+    );
+  }
 
   render() {
     return (
-      <div className={styles.mainView}>
-        <GoogleMapReact
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
-          />
-        </GoogleMapReact>
-      </div>
+      <MainViewLayout layout={this.props.layout} renderMap={this._renderMap} />
     );
   }
 }
-
-MainView.propTypes = {
-  center: {
-    lat: PropTypes.number,
-    lng: PropTypes.number
-  },
-  zoom: PropTypes.number
-};
-
-export default MainView;

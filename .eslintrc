@@ -23,7 +23,9 @@
     "no-alert": 0,
     "strict": 0,
     "arrow-body-style": [2, "as-needed"],
-    "no-confusing-arrow": [2, {"allowParens": true}]
+    "no-confusing-arrow": [2, {"allowParens": true}],
+    "max-len": ["error", 160],
+    "no-underscore-dangle": 0
   },
   "plugins": [
     "react", "import"

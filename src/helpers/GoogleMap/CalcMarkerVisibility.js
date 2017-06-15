@@ -7,7 +7,7 @@
 // if put empty then on the map will be visible the current ones that are on the screen
 const K_SCALE_SMALL = 0.3;
 const K_SCALE_MEDIUM = 0.45;
-const K_BEFORE_AFTER_SCALES = [{l: 15, scale: K_SCALE_SMALL}, {l: 10, scale: K_SCALE_MEDIUM}];
+const K_BEFORE_AFTER_SCALES = [{ l: 15, scale: K_SCALE_SMALL }, { l: 10, scale: K_SCALE_MEDIUM }];
 const K_SCALES_SUM = K_BEFORE_AFTER_SCALES.reduce((sum, el) => el.l + sum, 0);
 
 
@@ -48,10 +48,10 @@ export function getScale(rowIndex, rowFrom, rowTo, K_SCALE_NORMAL) {
 
 // this calculations is not precise (dirty)
 function _getRealFromTo(rowFrom, rowTo, maxVisibleRows, totalSize) {
-  let addFrom = ((rowFrom + maxVisibleRows + K_SCALES_SUM) > (totalSize - 1)) ? ((rowFrom + maxVisibleRows + K_SCALES_SUM) - (totalSize - 1)) : 0;
+  const addFrom = ((rowFrom + maxVisibleRows + K_SCALES_SUM) > (totalSize - 1)) ? ((rowFrom + maxVisibleRows + K_SCALES_SUM) - (totalSize - 1)) : 0;
 
   const dadd = K_SCALES_SUM - rowFrom;
-  let addTo = dadd >= 0 ? dadd : 0;
+  const addTo = dadd >= 0 ? dadd : 0;
 
   return {
     rowFrom: Math.max(0, rowFrom - K_SCALES_SUM - addFrom),
