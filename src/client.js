@@ -8,11 +8,16 @@ import getRoutes from './routes';
 import { history } from './services';
 import rootSaga from './redux/sagas';
 import configureStore from './redux/store/configureStore';
+import { selectLocationState } from './redux/selectors';
+
+// @TODO load config from somewhere else on client side
 import config from './config';
 
 const dest = document.getElementById('content');
 const store = configureStore(history, window.__data); // eslint-disable-line
-const syncedHistory = syncHistoryWithStore(history, store);
+const syncedHistory = syncHistoryWithStore(history, store, {
+  selectLocationState
+});
 
 GoogleAnalytics.initialize(config.app.googleAnalytics.appId);
 store.runSaga(rootSaga);

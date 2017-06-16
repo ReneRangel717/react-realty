@@ -1,8 +1,11 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux-immutable';
+
+import propertySearchReducer from 'modules/PropertySearch/redux/reducers';
+import routerReducer from './routerReducer';
 
 const rootReducer = combineReducers({
-  routing: routerReducer
+  route: routerReducer,
+  propertySearch: propertySearchReducer
 });
 
 export default rootReducer;

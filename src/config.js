@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (global.__SERVER__) {
+  require('dotenv').config(); //eslint-disable-line
+}
 
 const environment = {
   development: {

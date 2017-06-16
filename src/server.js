@@ -15,6 +15,7 @@ import configureStore from './redux/store/configureStore';
 import Html from './helpers/Html';
 import getRoutes from './routes';
 import waitAll from './redux/sagas/waitAll';
+import { selectLocationState } from './redux/selectors';
 import { Root } from 'containers';
 
 const app = new Express();
@@ -40,7 +41,9 @@ app.use((req, res) => {
 
   const memoryHistory = createMemoryHistory(req.url);
   const store = configureStore(memoryHistory);
-  const history = syncHistoryWithStore(memoryHistory, store);
+  const history = syncHistoryWithStore(memoryHistory, store, {
+    selectLocationState
+  });
   const allRoutes = getRoutes(store);
   const assets = webpackIsomorphicTools.assets();
 

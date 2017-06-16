@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { fromJS } from 'immutable';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware, { END } from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
@@ -10,7 +11,7 @@ export default function configureStore(history, initialState) {
 
   const store = createStore(
     rootReducer,
-    initialState,
+    fromJS(initialState),
     compose(
       applyMiddleware(
         routerMiddleware(history),
