@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import styles from './App.scss'; // eslint-disable-line
+import styles from './Layout.scss'; // eslint-disable-line
 
-class App extends Component {
+class Layout extends Component {
   render() {
     const { children } = this.props;
     return (
@@ -19,8 +19,8 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+Layout.propTypes = {
   children: PropTypes.node
 };
 
-export default App;
+export default Layout;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import {
-  App,
+  Layout,
   NotFound
 } from 'containers';
 
 export default () => {
   const routes = (
-    <Route path="/" component={App}>
+    <Route path="/" component={Layout}>
       <IndexRoute component={NotFound} />
       <Route path="/404" component={NotFound} />
       <Route path="*" component={NotFound} />
