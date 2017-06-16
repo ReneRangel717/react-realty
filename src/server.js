@@ -14,7 +14,7 @@ import config from './config';
 import configureStore from './redux/store/configureStore';
 import Html from './helpers/Html';
 import getRoutes from './routes';
-import waitAll from './sagas/waitAll';
+import waitAll from './redux/sagas/waitAll';
 import { Root } from 'containers';
 
 const app = new Express();
@@ -66,7 +66,7 @@ app.use((req, res) => {
       const rootComponent = (<Root
         store={store}
         routes={allRoutes}
-        history={memoryHistory}
+        history={history}
         renderProps={renderProps}
         type="server"
       />);
