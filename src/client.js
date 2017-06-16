@@ -6,11 +6,11 @@ import { Root } from 'containers';
 import rootSaga from './sagas';
 import getRoutes from './routes';
 import { history } from './services';
-import configureStore from './store/configureStore';
+import configureStore from './redux/store/configureStore';
 import config from './config';
 
 const dest = document.getElementById('content');
-const store = configureStore(window.__data); // eslint-disable-line
+const store = configureStore(history, window.__data); // eslint-disable-line
 
 GoogleAnalytics.initialize(config.app.googleAnalytics.appId);
 

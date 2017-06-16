@@ -8,9 +8,10 @@ import proxy from 'express-http-proxy';
 import path from 'path';
 import url from 'url';
 import { match, createMemoryHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import config from './config';
-import configureStore from './store/configureStore';
+import configureStore from './redux/store/configureStore';
 import Html from './helpers/Html';
 import getRoutes from './routes';
 import waitAll from './sagas/waitAll';
@@ -37,8 +38,9 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
 
-  const memoryHistory = createMemoryHistory();
-  const store = configureStore();
+  const memoryHistory = createMemoryHistory(req.url);
+  const store = configureStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
   const allRoutes = getRoutes(store);
   const assets = webpackIsomorphicTools.assets();
 
@@ -53,7 +55,7 @@ app.use((req, res) => {
     return;
   }
 
-  match({ routes: allRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ history, routes: allRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
