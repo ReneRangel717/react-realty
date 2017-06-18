@@ -34,7 +34,8 @@
     "import/parser": "babel-eslint",
     "import/resolve": {
       "moduleDirectory": ["node_modules", "src"]
-    }
+    },
+    "import/ignore": ["\\.(scss|less|css)$"]
   },
   "globals": {
     "__DEVELOPMENT__": true,

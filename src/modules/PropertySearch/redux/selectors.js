@@ -8,5 +8,6 @@ const selectMapInfo = createSelector(
 );
 
 export default {
+  selectModule,
   selectMapInfo
 };

@@ -3,7 +3,7 @@ import * as CONSTANTS from '../constants';
 
 import boundsChangeReducer from './boundsChangeReducer';
 
-// @TODO change default change, bounds, marginbounds
+// @TODO change default change, bounds, marginbounds to the location in URL, OR Boca Raton, FL
 // marginbounds is used not to display markers on around the boundaries so that it goes out of the map.
 
 const initialState = fromJS({
@@ -14,8 +14,9 @@ const initialState = fromJS({
     zoom: 9,
   },
   markers: [],
-  infoBoxIndex: -1,
-  briefBoxIndex: -1,
+  infoBoxIndex: -1, // info box displayed
+  briefBoxIndex: -1, // small info box displayed
+  highlightIndex: -1, // only highlighted in table
 });
 
 function propertySearchReducer(state = initialState, action) {
@@ -24,6 +25,8 @@ function propertySearchReducer(state = initialState, action) {
       return boundsChangeReducer(state, action);
     case CONSTANTS.SEARCH_MAP_TOGGLE_BRIEF:
       return state.set('briefBoxIndex', action.briefBoxIndex);
+    case CONSTANTS.SEARCH_MAP_TOGGLE_HIGHLIGHT_INDEX:
+      return state.set('highlightIndex', action.highlightIndex);
     case CONSTANTS.SEARCH_MAP_TOGGLE_INFOBOX:
       {
         const { infoBoxIndex } = action;

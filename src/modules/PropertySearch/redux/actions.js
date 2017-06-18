@@ -24,8 +24,16 @@ export function mapToggleInfobox(markerIndex) {
   };
 }
 
+export function mapToggleHighlightIndex(markerIndex) {
+  return {
+    type: CONSTANTS.SEARCH_MAP_TOGGLE_HIGHLIGHT_INDEX,
+    highlightIndex: markerIndex
+  };
+}
+
 export default {
   mapBoundsChange,
   mapToggleBrief,
-  mapToggleInfobox
+  mapToggleInfobox,
+  mapToggleHighlightIndex
 };
