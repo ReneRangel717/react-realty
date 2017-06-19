@@ -10,10 +10,9 @@ export function mapBoundsChange(params) {
   };
 }
 
-export function mapToggleBrief(markerIndex) {
+export function mapShowBrief() {
   return {
-    type: CONSTANTS.SEARCH_MAP_TOGGLE_BRIEF,
-    briefBoxIndex: markerIndex
+    type: CONSTANTS.SEARCH_MAP_SHOW_BRIEF
   };
 }
 
@@ -24,16 +23,16 @@ export function mapToggleInfobox(markerIndex) {
   };
 }
 
-export function mapToggleHighlightIndex(markerIndex) {
+export function mapToggleHoverIndex(markerIndex) {
   return {
-    type: CONSTANTS.SEARCH_MAP_TOGGLE_HIGHLIGHT_INDEX,
-    highlightIndex: markerIndex
+    type: CONSTANTS.SEARCH_MAP_TOGGLE_HOVER_INDEX,
+    hoverIndex: markerIndex
   };
 }
 
 export default {
   mapBoundsChange,
-  mapToggleBrief,
+  mapShowBrief,
   mapToggleInfobox,
-  mapToggleHighlightIndex
+  mapToggleHoverIndex
 };

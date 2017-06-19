@@ -20,16 +20,12 @@ class PropertyMarker extends Component {
   }
 
   componentWillUnmount() {
-    if (this.props.hoverState) {
-      this.props.onHoverStateChange(-1);
-    }
-
-    if (this.props.briefState) {
-      this.props.onBriefStateChange(-1);
+    if (this.props.hover) {
+      this.props.onHover(-1);
     }
 
     if (this.props.infoboxState) {
-      this.props.onInfoboxStateChange(-1);
+      this.props.showInfoBox(-1);
     }
 
     this._clearTimeout();
@@ -37,8 +33,7 @@ class PropertyMarker extends Component {
   }
 
   _elevateHovertoBrief = () => {
-    this.props.onHoverStateChange(-1);
-    this.props.onBriefStateChange(this.props.id);
+    this.props.showBriefBox();
   }
 
   _clearTimeout = () => {
@@ -52,31 +47,30 @@ class PropertyMarker extends Component {
   // calculating distance by marker pos and mouse pos didn't work out because
   // GoogleMap only supported constant for distanceToMouse
   _onMouseEnterContent = () => {
-    this.props.onHoverStateChange(this.props.id);
+    this.props.onHover(this.props.id);
     this._clearTimeout();
     this.hoverCounter = setTimeout(this._elevateHovertoBrief, BRIEF_BOX_TIMEOUT);
   }
 
   _onMouseLeaveContent = () => {
     this._clearTimeout();
-    this.props.onHoverStateChange(-1);
-    this.props.onBriefStateChange(-1);
+    this.props.onHover(-1);
   }
 
   _onClick = () => {
-    this.props.onInfoboxStateChange(this.props.id);
+    this.props.showInfoBox(this.props.id);
     this._clearTimeout();
   }
 
   _onCloseClick = () => {
-    this.props.onInfoboxStateChange(-1);
+    this.props.showInfoBox(-1);
   }
 
   render() {
     const {
       customClassName,
       hoverState,
-      briefState,
+      hover,
       infoboxState,
       data
     } = this.props;
@@ -90,8 +84,8 @@ class PropertyMarker extends Component {
     };
 
     const markerClassName = cx(styles.marker, customClassName, {
-      [styles.markerHoverState]: hoverState,
-      [styles.markerBriefState]: briefState,
+      [styles.markerHoverState]: hover,
+      [styles.markerBriefState]: hover && hoverState,
       [styles.markerInfoboxState]: infoboxState
     });
 
@@ -106,7 +100,7 @@ class PropertyMarker extends Component {
           <div className={styles.markerText}>{displayPrice}</div>
         </div>
         <PropertyInfoBox
-          briefState={briefState}
+          hoverState={hover && hoverState}
           infoboxState={infoboxState}
           data={data}
           onCloseClick={this.onCloseClick}
@@ -128,29 +122,26 @@ PropertyMarker.propTypes = {
   id: PropTypes.string.isRequired,
   data: PropTypes.any,
 
-  // hover -> highlight in table
-  // brief state -> small info box
-  // info box -> big info box with image carousel
+  hover: PropTypes.bool.isRequired,
   hoverState: PropTypes.bool.isRequired,
-  briefState: PropTypes.bool.isRequired,
   infoboxState: PropTypes.bool.isRequired,
-  onHoverStateChange: PropTypes.func.isRequired,
-  onBriefStateChange: PropTypes.func.isRequired,
-  onInfoboxStateChange: PropTypes.func.isRequired,
+  showBriefBox: PropTypes.func.isRequired,
+  showInfoBox: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired,
 
   customClassName: PropTypes.string
 };
 
 const mapStatesToProps = (state, props) => ({
-  hoverState: selectors.selectModule(state).get('highlightIndex') === props.id,
-  briefState: selectors.selectModule(state).get('briefBoxIndex') === props.id,
+  hoverState: selectors.selectModule(state).get('hoverState'),
+  hover: selectors.selectModule(state).get('hoverIndex') === props.id,
   infoboxState: selectors.selectModule(state).get('infoBoxIndex') === props.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onBriefStateChange: (markerIndex) => dispatch(actions.mapToggleBrief(markerIndex)),
-  onInfoboxStateChange: (markerIndex) => dispatch(actions.mapToggleInfobox(markerIndex)),
-  onHoverStateChange: (markerIndex) => dispatch(actions.mapToggleHighlightIndex(markerIndex))
+  showBriefBox: (markerIndex) => dispatch(actions.mapShowBrief(markerIndex)),
+  showInfoBox: (markerIndex) => dispatch(actions.mapToggleInfobox(markerIndex)),
+  onHover: (markerIndex) => dispatch(actions.mapToggleHoverIndex(markerIndex))
 });
 
 export default connect(mapStatesToProps, mapDispatchToProps)(PropertyMarker);

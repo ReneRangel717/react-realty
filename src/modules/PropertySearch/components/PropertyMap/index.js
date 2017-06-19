@@ -1,12 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleMap from 'google-map-react';
-import immutable from 'immutable';
 
 import PropertyMarker from 'modules/PropertySearch/components/PropertyMarker';
 import actions from 'modules/PropertySearch/redux/actions';
 import selectors from 'modules/PropertySearch/redux/selectors';
 
+// @TODO move below logic to redux-saga to load from API
+import immutable from 'immutable';
 const customData = immutable.fromJS([{
   _id: '123',
   lat: 60.138043,
@@ -69,8 +70,6 @@ PropertyMap.propTypes = {
   zoom: PropTypes.number,
   center: PropTypes.any,
   mapBoundsChange: PropTypes.func,
-  mapToggleBrief: PropTypes.func,
-  mapToggleInfobox: PropTypes.func
 };
 
 const mapStatesToProps = (state) => ({
@@ -80,8 +79,6 @@ const mapStatesToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   mapBoundsChange: (params) => dispatch(actions.mapBoundsChange(params)),
-  mapToggleBrief: (markerIndex) => dispatch(actions.mapToggleBrief(markerIndex)),
-  mapToggleInfobox: (markerIndex) => dispatch(actions.mapToggleInfobox(markerIndex))
 });
 
 export default connect(mapStatesToProps, mapDispatchToProps)(PropertyMap);

@@ -6,14 +6,14 @@ class PropertyInfoBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      briefState: props.briefState,
+      hoverState: props.hoverState,
       infoboxState: props.infoboxState
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.briefState !== this.props.briefState) {
-      this.setState({ briefState: nextProps.briefState });
+    if (nextProps.hoverState !== this.props.hoverState) {
+      this.setState({ hoverState: nextProps.hoverState });
     }
 
     if (nextProps.infoboxState !== this.props.infoboxState) {
@@ -23,9 +23,9 @@ class PropertyInfoBox extends Component {
 
   render() {
     const { data } = this.props;
-    const { briefState, infoboxState } = this.state;
+    const { hoverState, infoboxState } = this.state;
 
-    if (!briefState && !infoboxState) {
+    if (!hoverState && !infoboxState) {
       // no need to render
       return null;
     }
@@ -36,7 +36,7 @@ class PropertyInfoBox extends Component {
     } = dataObj;
 
     const boxClassNames = cx(styles.infoBoxHolder, {
-      [styles.infoBoxBriefState]: briefState,
+      [styles.infoBoxBriefState]: hoverState,
       [styles.infoBoxExpandedState]: infoboxState
     });
 
@@ -52,7 +52,7 @@ class PropertyInfoBox extends Component {
 PropertyInfoBox.propTypes = {
   data: PropTypes.any,
 
-  briefState: PropTypes.bool.isRequired,
+  hoverState: PropTypes.bool.isRequired,
   infoboxState: PropTypes.bool.isRequired,
 
   onCloseClick: PropTypes.func

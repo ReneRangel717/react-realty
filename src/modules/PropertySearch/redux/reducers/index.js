@@ -14,19 +14,21 @@ const initialState = fromJS({
     zoom: 9,
   },
   markers: [],
-  infoBoxIndex: -1, // info box displayed
-  briefBoxIndex: -1, // small info box displayed
-  highlightIndex: -1, // only highlighted in table
+  infoBoxIndex: '-1', // info box displayed
+  hoverIndex: '-1', // only hover in table
+  hoverState: false, // false: hover, true: brief info
 });
 
 function propertySearchReducer(state = initialState, action) {
   switch (action.type) {
     case CONSTANTS.SEARCH_MAP_BOUNDS_CHANGE:
       return boundsChangeReducer(state, action);
-    case CONSTANTS.SEARCH_MAP_TOGGLE_BRIEF:
-      return state.set('briefBoxIndex', action.briefBoxIndex);
-    case CONSTANTS.SEARCH_MAP_TOGGLE_HIGHLIGHT_INDEX:
-      return state.set('highlightIndex', action.highlightIndex);
+    case CONSTANTS.SEARCH_MAP_SHOW_BRIEF:
+      return state.set('hoverState', true);
+    case CONSTANTS.SEARCH_MAP_TOGGLE_HOVER_INDEX:
+      return state
+        .set('hoverIndex', action.hoverIndex)
+        .set('hoverState', false);
     case CONSTANTS.SEARCH_MAP_TOGGLE_INFOBOX:
       {
         const { infoBoxIndex } = action;
