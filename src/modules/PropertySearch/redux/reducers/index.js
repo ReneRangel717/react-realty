@@ -31,7 +31,7 @@ function propertySearchReducer(state = initialState, action) {
       {
         const { infoBoxIndex } = action;
         const currentIndex = state.get('infoBoxIndex');
-        return infoBoxIndex === currentIndex ? -1 : infoBoxIndex;
+        return state.set('infoBoxIndex', infoBoxIndex === currentIndex ? -1 : infoBoxIndex);
       }
     default:
   }

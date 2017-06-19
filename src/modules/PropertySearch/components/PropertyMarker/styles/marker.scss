@@ -1,0 +1,73 @@
+@import 'src/theme/style';
+
+.markerHolder {
+  position: absolute;
+}
+
+.marker {
+  position: relative;
+  width: 60px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: #333;
+
+  .markerText {
+    width: 100%;
+    height: 100%;
+    color: #68CC94;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: $font-family-sans-serif;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    bottom: -10px;
+    border: 5px solid transparent;
+    border-top-color: #333;
+  }
+}
+
+.markerHoverState {
+  cursor: pointer;
+  background-color: #68CC94;
+
+  &:before {
+    border-top-color: #68CC94;
+  }
+
+  .markerText {
+    color: #333;
+  }
+}
+
+// @TODO update colors to more eye-catching
+.markerBriefState {
+  cursor: pointer;
+  background-color: #CC6894;
+
+  &:before {
+    border-top-color: #CC6894;
+  }
+
+  .markerText {
+    color: #333;
+  }
+}
+
+.markerInfoboxState {
+  cursor: pointer;
+  background-color: #94CC68;
+
+  &:before {
+    border-top-color: #94CC68;
+  }
+
+  .markerText {
+    color: #333;
+  }
+}

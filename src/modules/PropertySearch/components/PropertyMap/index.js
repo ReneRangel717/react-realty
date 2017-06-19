@@ -4,54 +4,36 @@ import GoogleMap from 'google-map-react';
 import immutable from 'immutable';
 
 import PropertyMarker from 'modules/PropertySearch/components/PropertyMarker';
-import { customDistanceToMouse } from 'modules/PropertySearch/utils';
 import actions from 'modules/PropertySearch/redux/actions';
 import selectors from 'modules/PropertySearch/redux/selectors';
 
-// @TODO move these constants to configuration
-const K_MARGIN_TOP = 30;
-const K_MARGIN_RIGHT = 30;
-const K_MARGIN_BOTTOM = 30;
-const K_MARGIN_LEFT = 30;
-const K_HOVER_DISTANCE = 30;
-
-
 const customData = immutable.fromJS([{
   _id: '123',
-  lat: 60.538043,
+  lat: 60.138043,
   lng: 30.237157,
-  price: 203000
+  price: 203000,
+  remarks: 'Nice 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+  images: ['img_18231432409428673.jpg']
 }, {
   _id: '124',
-  lat: 59.938033,
-  lng: 30.337157,
-  price: 1203000
+  lat: 59.934280,
+  lng: 30.335099,
+  price: 1203000,
+  remarks: 'Great 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+  images: ['img_18231432409428673.jpg']
 }, {
   _id: '125',
-  lat: 60.438043,
+  lat: 60.338043,
   lng: 29.835157,
-  price: 2300000
+  price: 2300000,
+  remarks: 'Awesome 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+  images: ['img_18231432409428673.jpg']
 }]);
 
 class PropertyMap extends Component {
   _onBoundsChange = (center, zoom, bounds, marginBounds) => {
     this.props.mapBoundsChange({ center, zoom, bounds, marginBounds });
   }
-
-  // @TODO implement child events for markers
-  _onChildClick = (key, childProps) => {
-    console.log(key, childProps);
-  };
-
-  _onChildMouseEnter = (key, childProps) => {
-    console.log(key, childProps);
-  };
-
-  _onChildMouseLeave = (key, childProps) => {
-    console.log(key, childProps);
-  };
-
-  _distanceToMouse = customDistanceToMouse
 
   renderMarker = (marker) => {
     const id = marker.get('_id');
@@ -73,12 +55,6 @@ class PropertyMap extends Component {
         center={center}
         zoom={zoom}
         onBoundsChange={this._onBoundsChange}
-        onChildClick={this._onChildClick}
-        onChildMouseEnter={this._onChildMouseEnter}
-        onChildMouseLeave={this._onChildMouseLeave}
-        distanceToMouse={this._distanceToMouse}
-        margin={[K_MARGIN_TOP, K_MARGIN_RIGHT, K_MARGIN_BOTTOM, K_MARGIN_LEFT]}
-        hoverDistance={K_HOVER_DISTANCE}
       >
         {
           // @TODO load marekrs from redux

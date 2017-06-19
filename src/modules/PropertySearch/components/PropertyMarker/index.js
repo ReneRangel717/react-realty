@@ -5,19 +5,18 @@ import { getDisplayPrice } from 'modules/PropertySearch/utils';
 import actions from 'modules/PropertySearch/redux/actions';
 import selectors from 'modules/PropertySearch/redux/selectors';
 
-import styles from './styles.scss';
+import PropertyInfoBox from './PropertyInfoBox';
+import styles from './styles/marker.scss';
+
+import { MARKER_POS_OFFSET_X, MARKER_POS_OFFSET_Y } from 'modules/PropertySearch/utils/customDistanceToMouse';
+export const BRIEF_BOX_TIMEOUT = 1000; // 1000ms
 
 class PropertyMarker extends Component {
   constructor(props) {
     super(props);
     this.alive = true;
+    this.hoverCounter = null;
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.$hover !== this.props.$hover) {
-  //     setTimeout(() => this._onHoverStateChange(), 30);
-  //   }
-  // }
 
   componentWillUnmount() {
     if (this.props.hoverState) {
@@ -31,15 +30,41 @@ class PropertyMarker extends Component {
     if (this.props.infoboxState) {
       this.props.onInfoboxStateChange(-1);
     }
+
+    this._clearTimeout();
     this.alive = false;
   }
 
+  _elevateHovertoBrief = () => {
+    this.props.onHoverStateChange(-1);
+    this.props.onBriefStateChange(this.props.id);
+  }
+
+  _clearTimeout = () => {
+    if (this.hoverCounter) {
+      clearTimeout(this.hoverCounter);
+      this.hoverCounter = null;
+    }
+  }
+
+  // NOTE
+  // calculating distance by marker pos and mouse pos didn't work out because
+  // GoogleMap only supported constant for distanceToMouse
   _onMouseEnterContent = () => {
-    this.props.$onMouseAllow(false); // disable mouse move hovers
+    this.props.onHoverStateChange(this.props.id);
+    this._clearTimeout();
+    this.hoverCounter = setTimeout(this._elevateHovertoBrief, BRIEF_BOX_TIMEOUT);
   }
 
   _onMouseLeaveContent = () => {
-    this.props.$onMouseAllow(true); // enable mouse move hovers
+    this._clearTimeout();
+    this.props.onHoverStateChange(-1);
+    this.props.onBriefStateChange(-1);
+  }
+
+  _onClick = () => {
+    this.props.onInfoboxStateChange(this.props.id);
+    this._clearTimeout();
   }
 
   _onCloseClick = () => {
@@ -49,19 +74,42 @@ class PropertyMarker extends Component {
   render() {
     const {
       customClassName,
+      hoverState,
+      briefState,
+      infoboxState,
       data
     } = this.props;
     const displayPrice = getDisplayPrice(data.get('price'));
 
+    // initially any map object has left top corner at lat lng coordinates
+    // it's on you to set object origin to 0,0 coordinates
+    const markerPosStyle = {
+      left: MARKER_POS_OFFSET_X,
+      top: MARKER_POS_OFFSET_Y
+    };
+
+    const markerClassName = cx(styles.marker, customClassName, {
+      [styles.markerHoverState]: hoverState,
+      [styles.markerBriefState]: briefState,
+      [styles.markerInfoboxState]: infoboxState
+    });
+
     return (
-      <div className={styles.markerHolder}>
+      <div className={styles.markerHolder} style={markerPosStyle}>
         <div
-          className={cx(styles.marker, customClassName)}
+          className={markerClassName}
           onMouseEnter={this._onMouseEnterContent}
           onMouseLeave={this._onMouseLeaveContent}
+          onClick={this._onClick}
         >
           <div className={styles.markerText}>{displayPrice}</div>
         </div>
+        <PropertyInfoBox
+          briefState={briefState}
+          infoboxState={infoboxState}
+          data={data}
+          onCloseClick={this.onCloseClick}
+        />
       </div>
     );
   }
@@ -93,9 +141,9 @@ PropertyMarker.propTypes = {
 };
 
 const mapStatesToProps = (state, props) => ({
-  hoverState: selectors.selectModule(state).highlightIndex === props.id,
-  briefState: selectors.selectModule(state).briefBoxIndex === props.id,
-  infoboxState: selectors.selectModule(state).infoBoxIndex === props.id,
+  hoverState: selectors.selectModule(state).get('highlightIndex') === props.id,
+  briefState: selectors.selectModule(state).get('briefBoxIndex') === props.id,
+  infoboxState: selectors.selectModule(state).get('infoBoxIndex') === props.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

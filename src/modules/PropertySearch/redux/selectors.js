@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-const selectModule = () => (state) => state.get('propertySearch');
+const selectModule = (state) => state.get('propertySearch');
 
 const selectMapInfo = createSelector(
-  selectModule(),
+  selectModule,
   (substate) => substate.get('mapInfo')
 );
 
