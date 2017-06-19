@@ -8,7 +8,8 @@ import selectors from 'modules/PropertySearch/redux/selectors';
 import PropertyInfoBox from './PropertyInfoBox';
 import styles from './styles/marker.scss';
 
-import { MARKER_POS_OFFSET_X, MARKER_POS_OFFSET_Y } from 'modules/PropertySearch/utils/customDistanceToMouse';
+export const MARKER_POS_OFFSET_X = -30;
+export const MARKER_POS_OFFSET_Y = -20;
 export const BRIEF_BOX_TIMEOUT = 1000; // 1000ms
 
 class PropertyMarker extends Component {
