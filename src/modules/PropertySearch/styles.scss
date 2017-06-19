@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.mapContainer {
+  flex: 1;
+}
+
+.tableContainer {
+  flex: 0 0 350px; // 350px on desktop. @TODO fix layout for mobile
+}

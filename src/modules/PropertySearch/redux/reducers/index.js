@@ -13,9 +13,33 @@ const initialState = fromJS({
     marginBounds: [60.2843135300829, 29.21655153124999, 59.58811868963835, 31.45776246874999],
     zoom: 9,
   },
-  markers: [],
-  infoBoxIndex: '-1', // info box displayed
-  hoverIndex: '-1', // only hover in table
+  markers: [{
+    _id: '123',
+    lat: 60.138043,
+    lng: 30.237157,
+    price: 203000,
+    description: 'Nice 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+    mlsid: 'beaches20170613204719284000000000',
+    piccount: 24
+  }, {
+    _id: '124',
+    lat: 59.934280,
+    lng: 30.335099,
+    price: 1203000,
+    description: 'Great 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+    mlsid: 'beaches20170614224303940911000000',
+    piccount: 16
+  }, {
+    _id: '125',
+    lat: 60.338043,
+    lng: 29.835157,
+    price: 2300000,
+    description: 'Awesome 1 bed 1.5 bath top floor unit with wood laminate flooring in the living area, an updated kitchen...',
+    mlsid: 'beaches20170614183421376967000000',
+    piccount: 29
+  }],
+  infoBoxIndex: -1, // info box displayed
+  hoverIndex: -1, // only hover in table
   hoverState: false, // false: hover, true: brief info
 });
 

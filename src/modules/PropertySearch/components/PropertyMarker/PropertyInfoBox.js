@@ -32,7 +32,7 @@ class PropertyInfoBox extends Component {
 
     const dataObj = data.toJS();
     const {
-      remarks: description
+      description
     } = dataObj;
 
     const boxClassNames = cx(styles.infoBoxHolder, {
