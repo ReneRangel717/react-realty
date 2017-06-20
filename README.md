@@ -1,9 +1,13 @@
-
 ## Getting Started
+
+
 
 `$ git clone git@bitbucket.org:drewnick/react-realty.git`
 
-`$ cd react-universal-saga && npm install`
+Make env 
+`$ cp .env.development .env`
+
+`$ cd react-realty && npm install`
 
 `$ npm run dev` (run in development mode)
 
