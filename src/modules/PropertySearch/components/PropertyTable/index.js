@@ -25,6 +25,7 @@ class PropertyTable extends Component {
           data={marker}
           hoverState={this.props.hoverIndex === id}
           onHover={this._onHoverRow(id)}
+          onMouseLeave={this._onHoverRow(-1)}
           onClick={this._onClickRow(id)}
         />
       );

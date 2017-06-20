@@ -17,7 +17,7 @@ class TableRow extends Component {
   }
 
   render() {
-    const { data, onHover, onClick } = this.props;
+    const { data, onHover, onClick, onMouseLeave } = this.props;
     const { hoverState } = this.state;
     const rowClassNames = cx(styles.tableRow, {
       [styles.tableRowHover]: hoverState
@@ -28,7 +28,7 @@ class TableRow extends Component {
     } = dataObj;
 
     return (
-      <div className={rowClassNames} onMouseOver={onHover} onClick={onClick}>
+      <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
         <p>{description}</p>
       </div>
     );
@@ -39,6 +39,7 @@ TableRow.propTypes = {
   data: PropTypes.any,
   hoverState: PropTypes.bool.isRequired,
   onHover: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
