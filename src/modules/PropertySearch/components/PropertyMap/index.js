@@ -28,6 +28,7 @@ class PropertyMap extends Component {
     const { zoom, center, filteredMarkers } = this.props;
     return (
       <GoogleMap
+        apiKey={process.env.GOOGLE_MAP_KEY}
         center={center}
         zoom={zoom}
         onBoundsChange={this._onBoundsChange}

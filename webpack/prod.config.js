@@ -60,6 +60,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         "NODE_ENV" : '"production"',
+        GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY)
       },
 
       __CLIENT__: true,
