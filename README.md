@@ -1,5 +1,8 @@
 ## Getting Started
 
+Make env
+`$ cp .env.development .env`
+
 `$ git clone git@bitbucket.org:drewnick/react-realty.git`
 
 `$ cd react-realty && npm install`
