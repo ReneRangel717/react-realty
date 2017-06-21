@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
+import ImageCarousel from 'components/ImageCarousel';
+
 import styles from './styles/row.scss';
 
 class TableRow extends Component {
@@ -16,6 +18,16 @@ class TableRow extends Component {
     }
   }
 
+  renderCarousel = () => {
+    const { data } = this.props;
+    const dataObj = data.toJS();
+    const { mlsid, piccount } = dataObj;
+
+    return (
+      <ImageCarousel mlsId={mlsid} picCount={piccount} size="sm" />
+    );
+  }
+
   render() {
     const { data, onHover, onClick, onMouseLeave } = this.props;
     const { hoverState } = this.state;
@@ -29,7 +41,8 @@ class TableRow extends Component {
 
     return (
       <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
-        <p>{description}</p>
+        <p className={styles.description}>{description}</p>
+        {this.renderCarousel()}
       </div>
     );
   }

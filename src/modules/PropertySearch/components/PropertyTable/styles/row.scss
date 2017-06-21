@@ -12,9 +12,22 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 .tableRowHover {
   cursor: pointer;
   background-color: #AAA;
+}
+
+.description {
+  float: right;
+  width: 150px;
+  height: 100px;
+  overflow-y: hidden;
 }

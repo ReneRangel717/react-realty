@@ -16,9 +16,10 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: {
     'main': [
-      'bootstrap-loader',
       'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
-      './src/client.js'
+      './src/client.js',
+      'slick-carousel/slick/slick.css',
+      'slick-carousel/slick/slick-theme.css'
     ]
   },
   output: {
@@ -36,6 +37,7 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!postcss-loader!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!postcss-loader!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
+      { test: /\.css/, loader: 'style!css?modules&importLoaders=1&sourceMap&localIdentName=[local]' },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
@@ -60,7 +62,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         "NODE_ENV" : '"production"',
-        GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY)
+        GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY),
+        IMG_BASE_URL: JSON.stringify(process.env.IMG_BASE_URL)
       },
 
       __CLIENT__: true,

@@ -1,31 +1,5 @@
 {
   "name": "react-universal-saga",
-  "description": "Universal React App Starter ft. Redux Saga",
-  "author": "Kawi Xiao <kawixiao@gmail.com> (http://github.com/xkawi)",
-  "version": "1.1.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xkawi/react-universal-saga"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xkawi/react-universal-saga/issues"
-  },
-  "keywords": [
-    "react",
-    "isomorphic",
-    "universal",
-    "webpack",
-    "express",
-    "hot reloading",
-    "react-hot-reloader",
-    "redux",
-    "starter",
-    "boilerplate",
-    "babel",
-    "saga",
-    "redux saga"
-  ],
   "main": "bin/server.js",
   "scripts": {
     "start": "better-npm-run start-prod",
@@ -103,7 +77,6 @@
     "lodash": "^4.13.1",
     "normalizr": "^3.2.2",
     "react": "^15.4.2",
-    "react-bootstrap": "^0.31.0",
     "react-controllables": "^0.6.0",
     "react-dom": "^15.4.2",
     "react-ga": "^2.1.0",
@@ -113,15 +86,19 @@
     "react-redux": "^5.0.5",
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.8",
+    "react-slick": "^0.14.11",
     "redux": "^3.5.2",
     "redux-actions": "^2.0.3",
     "redux-immutable": "^4.0.0",
     "redux-logger": "^3.0.1",
     "redux-saga": "^0.14.5",
     "reselect": "^3.0.1",
+    "resolve-url-loader": "^1.6.1",
     "scroll-behavior": "^0.8.2",
+    "semantic-ui-react": "^0.68.5",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
+    "slick-carousel": "^1.6.0",
     "url-loader": "^0.5.7",
     "warning": "^3.0.0",
     "webpack-isomorphic-tools": "^3.0.2"
@@ -143,8 +120,6 @@
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.11.6",
     "better-npm-run": "0.0.11",
-    "bootstrap-loader": "^1.0.10",
-    "bootstrap-sass": "^3.3.5",
     "clean-webpack-plugin": "^0.1.6",
     "concurrently": "^3.1.0",
     "eslint": "2.13.1",

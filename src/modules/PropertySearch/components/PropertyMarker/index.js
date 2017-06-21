@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
 import { connect } from 'react-redux';
-import { getDisplayPrice } from 'modules/PropertySearch/utils';
+import { getDisplayPrice } from 'utils';
 import actions from 'modules/PropertySearch/redux/actions';
 import selectors from 'modules/PropertySearch/redux/selectors';
 
@@ -47,12 +47,16 @@ class PropertyMarker extends Component {
   // calculating distance by marker pos and mouse pos didn't work out because
   // GoogleMap only supported constant for distanceToMouse
   _onMouseEnterContent = () => {
+    this.props.$onMouseAllow(false); // disable mouse move hovers
+
     this.props.onHover(this.props.id);
     this._clearTimeout();
     this.hoverCounter = setTimeout(this._elevateHovertoBrief, BRIEF_BOX_TIMEOUT);
   }
 
   _onMouseLeaveContent = () => {
+    this.props.$onMouseAllow(true); // enable mouse move hovers
+
     this._clearTimeout();
     this.props.onHover(-1);
   }

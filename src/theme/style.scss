@@ -1,9 +1,6 @@
-$bootstrap-sass-asset-helper: false !default;
 //
 // Global Style Variabls
 // --------------------------------------------------
-
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
 
 //== Colors
 //
@@ -34,15 +31,6 @@ $body-bg:               #fff !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-dark !default;
 
-//** Global textual link color.
-$link-color:            $brand-primary !default;
-//** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%) !default;
-//** Link hover decoration.
-$link-hover-decoration: underline !default;
-
-$default-transition:     ease .7s !default;
-
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
@@ -71,18 +59,11 @@ $headings-font-weight:    500 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          inherit !default;
 
+* {
+  box-sizing: border-box;
+}
 
-//== Iconography
-//
-//## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
-
-//** Load fonts from this directory.
-
-// [converter] If $bootstrap-sass-asset-helper if used, provide path relative to the assets load path.
-// [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
-$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../fonts/bootstrap/") !default;
-
-//** File name for all font files.
-$icon-font-name:          "glyphicons-halflings-regular" !default;
-//** Element ID within SVG icon file.
-$icon-font-svg-id:        "glyphicons_halflingsregular" !default;
+body {
+  margin: 0;
+  padding: 0;
+}

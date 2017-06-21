@@ -68,9 +68,10 @@ module.exports = {
   entry: {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      'bootstrap-loader',
       'font-awesome-webpack!./src/theme/font-awesome.config.js',
-      './src/client.js'
+      './src/client.js',
+      'slick-carousel/slick/slick.css',
+      'slick-carousel/slick/slick-theme.css'
     ]
   },
   node: {
@@ -88,6 +89,7 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!less?outputStyle=expanded&sourceMap' },
       { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass?outputStyle=expanded&sourceMap' },
+      { test: /\.css/, loader: 'style!css?modules&importLoaders=1&sourceMap&localIdentName=[local]' },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
@@ -113,7 +115,8 @@ module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
       'process.env': {
-        GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY)
+        GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY),
+        IMG_BASE_URL: JSON.stringify(process.env.IMG_BASE_URL)
       },
       __CLIENT__: true,
       __SERVER__: false,
