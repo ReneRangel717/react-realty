@@ -7,6 +7,8 @@ import http from 'http';
 import proxy from 'express-http-proxy';
 import path from 'path';
 import url from 'url';
+import request from 'request';
+import queryString from 'query-string';
 import { match, createMemoryHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -16,6 +18,7 @@ import Html from './helpers/Html';
 import getRoutes from './routes';
 import waitAll from './redux/sagas/waitAll';
 import { selectLocationState } from './redux/selectors';
+import { GOOGLE_PLACE_API_PATH } from './constants/api';
 import { Root } from 'containers';
 
 const app = new Express();
@@ -33,6 +36,20 @@ app.use('/api', proxy(config.apiBaseUrl, {
   // eslint-disable-next-line
   forwardPath: (req, res) => url.parse(req.url).path
 }));
+
+app.use('/google-place-api', (req, res) => {
+  const query = queryString.stringify({
+    key: config.googlePlaceAPIKey,
+    ...req.query
+  });
+  request(`${GOOGLE_PLACE_API_PATH}?${query}`, (error, response, body) => {
+    if (error) {
+      return res.status(500).send(error);
+    }
+
+    return res.json(JSON.parse(body));
+  });
+});
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {

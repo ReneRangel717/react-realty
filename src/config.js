@@ -15,6 +15,7 @@ module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || '3000',
   apiBaseUrl: process.env.API_URL || 'http://localhost',
+  googlePlaceAPIKey: process.env.GOOGLE_PLACE_API_KEY || '',
   app: {
     googleAnalytics: {
       appId: process.env.GOOGLE_ANALYTIC_ID || 'UA-XXXXXXXX-X'

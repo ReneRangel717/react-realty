@@ -5,13 +5,17 @@ import {
   NotFound
 } from 'containers';
 import {
+  HomePage,
   PropertySearch
 } from './modules/pages';
 
 export default () => {
   const routes = (
     <Route path="/" component={Layout}>
-      <IndexRoute component={PropertySearch} />
+      <IndexRoute component={HomePage} />
+      <Route path="s">
+        <Route path=":city" component={PropertySearch} />
+      </Route>
       <Route path="/404" component={NotFound} />
       <Route path="*" component={NotFound} />
     </Route>

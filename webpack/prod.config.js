@@ -62,6 +62,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         "NODE_ENV" : '"production"',
+        GOOGLE_ANALYTIC_ID: JSON.stringify(process.env.GOOGLE_ANALYTIC_ID),
         GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY),
         IMG_BASE_URL: JSON.stringify(process.env.IMG_BASE_URL)
       },

@@ -1,4 +1,4 @@
-import * as CONSTANTS from './constants';
+import * as CONSTANTS from '../constants';
 
 /**
  * @param { center, zoom, bounds, marginBounds, } params
@@ -30,34 +30,9 @@ export function mapToggleHoverIndex(markerIndex) {
   };
 }
 
-export function propertySearchRequest() {
-  return {
-    type: CONSTANTS.PROPERTY_SEARCH_REQUEST
-  };
-}
-
-export function propertySearchSuccess(data) {
-  console.log(data);
-  return {
-    type: CONSTANTS.PROPERTY_SEARCH_SUCCESS,
-    ...data
-  };
-}
-
-// @TODO manipulate various error types
-export function propertySearchError(error) {
-  return {
-    type: CONSTANTS.PROPERTY_SEARCH_ERROR,
-    error
-  };
-}
-
 export default {
   mapBoundsChange,
   mapShowBrief,
   mapToggleInfobox,
   mapToggleHoverIndex,
-  propertySearchRequest,
-  propertySearchSuccess,
-  propertySearchError
 };
