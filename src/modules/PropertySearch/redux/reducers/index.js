@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import * as CONSTANTS from '../constants';
 
 import boundsChangeReducer from './boundsChangeReducer';
+import googlePlaceAPISuccessReducer from './googlePlaceAPISuccessReducer';
 
 // @TODO change default change, bounds, marginbounds to the location in URL, OR Boca Raton, FL
 // marginbounds is used not to display markers on around the boundaries so that it goes out of the map.
@@ -35,6 +36,10 @@ function propertySearchReducer(state = initialState, action) {
         const currentIndex = state.get('infoBoxIndex');
         return state.set('infoBoxIndex', infoBoxIndex === currentIndex ? -1 : infoBoxIndex);
       }
+    case CONSTANTS.GOOGLE_PLACE_SEARCH_SUCCESS:
+      return googlePlaceAPISuccessReducer(state, action);
+    case CONSTANTS.PROPERTY_SEARCH_SUCCESS:
+      return state.set('markers', fromJS(action.response.data));
     default:
   }
   return state;

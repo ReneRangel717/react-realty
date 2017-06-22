@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 
 import PropertyMap from './components/PropertyMap';
 import PropertyTable from './components/PropertyTable';
@@ -18,9 +19,10 @@ class PropertySearch extends Component {
   }
 
   render() {
+    const mapClassName = cx(styles.mapContainer, 'mapContainer'); // mapContainer is used to determine size with jQuery
     return (
       <div className={styles.container}>
-        <div className={styles.mapContainer}>
+        <div className={mapClassName}>
           <PropertyMap />
         </div>
         <div className={styles.tableContainer}>

@@ -7,7 +7,6 @@ export function propertySearchRequest() {
 }
 
 export function propertySearchSuccess(data) {
-  console.log(data);
   return {
     type: CONSTANTS.PROPERTY_SEARCH_SUCCESS,
     ...data

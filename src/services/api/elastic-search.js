@@ -6,9 +6,13 @@ import { SEARCH_API_PROXY_ROOT } from 'constants/api';
 function normalize(result) {
   return (result || []).map((property) => {
     const { _source, ...otherProps } = property;
+    const { location } = _source;
+    const [lat, lng] = location.split(',');
     return {
       ...otherProps,
-      ..._source
+      ..._source,
+      lat: lat * 1,
+      lng: lng * 1
     };
   });
 }

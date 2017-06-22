@@ -21,10 +21,10 @@ class TableRow extends Component {
   renderCarousel = () => {
     const { data } = this.props;
     const dataObj = data.toJS();
-    const { mlsid, piccount } = dataObj;
+    const { id, piccount } = dataObj;
 
     return (
-      <ImageCarousel mlsId={mlsid} picCount={piccount} size="sm" />
+      <ImageCarousel id={id} picCount={piccount} size="sm" />
     );
   }
 
@@ -36,12 +36,12 @@ class TableRow extends Component {
     });
     const dataObj = data.toJS();
     const {
-      description
+      remarks
     } = dataObj;
 
     return (
       <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
-        <p className={styles.description}>{description}</p>
+        <p className={styles.description}>{remarks}</p>
         {this.renderCarousel()}
       </div>
     );

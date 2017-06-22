@@ -10,11 +10,11 @@ class ImageCarousel extends Component {
   }
 
   renderImages = () => {
-    const { mlsId, picCount, size } = this.props;
+    const { id, picCount, size } = this.props;
     const className = styles[`image-${size}`];
     return new Array(picCount).fill(1).map((v, index) => (
-      <div key={`mlsId${index}`}>
-        <img className={className} src={getImageUrl(mlsId, index + 1, size)} alt={`mlsId${index}`} />
+      <div key={`id-${index}`}>
+        <img className={className} src={getImageUrl(id, index + 1, size)} alt={`id-${index}`} />
       </div>
     ));
   }
@@ -43,7 +43,7 @@ class ImageCarousel extends Component {
 }
 
 ImageCarousel.propTypes = {
-  mlsId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   picCount: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired
 };

@@ -8,7 +8,6 @@ export function googlePlaceSearchRequest(place) {
 }
 
 export function googlePlaceSearchSuccess(data) {
-  console.log(data);
   return {
     type: CONSTANTS.GOOGLE_PLACE_SEARCH_SUCCESS,
     ...data

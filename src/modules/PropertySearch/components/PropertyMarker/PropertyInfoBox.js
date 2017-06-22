@@ -27,14 +27,14 @@ class PropertyInfoBox extends Component {
   renderCarousel = () => {
     const { data } = this.props;
     const dataObj = data.toJS();
-    const { mlsid, piccount } = dataObj;
+    const { id, piccount } = dataObj;
     const { infoboxState } = this.state;
     if (!infoboxState) {
       return null;
     }
 
     return (
-      <ImageCarousel mlsId={mlsid} picCount={piccount} size="sm" />
+      <ImageCarousel id={id} picCount={piccount} size="sm" />
     );
   }
 
