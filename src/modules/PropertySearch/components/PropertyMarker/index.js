@@ -84,7 +84,7 @@ class PropertyMarker extends Component {
     const displayPrice = getDisplayPrice(data.get('price'));
 
     // calculating z-index
-    const zIndex = MIN_ZINDEX - (briefBoxState || infoboxState ? 20 : 0) + (hover ? HOVER_DEFAULT_Z_INDEX : 0);
+    const zIndex = MIN_ZINDEX - (briefBoxState || infoboxState ? 20 : 0) + ((hover || infoboxState) ? HOVER_DEFAULT_Z_INDEX : 0);
     const infoBoxZIndex = HOVER_DEFAULT_Z_INDEX - 20 + 1 + (briefBoxState ? 1 : 0);
 
     // initially any map object has left top corner at lat lng coordinates
