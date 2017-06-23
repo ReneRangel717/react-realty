@@ -39,7 +39,7 @@ class PropertyInfoBox extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, style } = this.props;
     const { hoverState, infoboxState } = this.state;
 
     if (!hoverState && !infoboxState) {
@@ -59,7 +59,7 @@ class PropertyInfoBox extends Component {
 
     // @TODO calculate infobox position dynamically on the edge of map
     return (
-      <div className={boxClassNames}>
+      <div className={boxClassNames} style={style}>
         {this.renderCarousel()}
         <p>{remarks.substr(0, 100)}...</p>
       </div>
@@ -72,8 +72,13 @@ PropertyInfoBox.propTypes = {
 
   hoverState: PropTypes.bool.isRequired,
   infoboxState: PropTypes.bool.isRequired,
+  style: PropTypes.object,
 
   onCloseClick: PropTypes.func
+};
+
+PropertyInfoBox.defaultProps = {
+  style: {},
 };
 
 export default PropertyInfoBox;

@@ -11,6 +11,8 @@ import styles from './styles/marker.scss';
 export const MARKER_POS_OFFSET_X = -30;
 export const MARKER_POS_OFFSET_Y = -20;
 export const BRIEF_BOX_TIMEOUT = 1000; // 1000ms
+export const MIN_ZINDEX = 10000;
+export const HOVER_DEFAULT_Z_INDEX = 1000000;
 
 class PropertyMarker extends Component {
   constructor(props) {
@@ -78,7 +80,12 @@ class PropertyMarker extends Component {
       infoboxState,
       data
     } = this.props;
+    const briefBoxState = hover && hoverState;
     const displayPrice = getDisplayPrice(data.get('price'));
+
+    // calculating z-index
+    const zIndex = MIN_ZINDEX - (briefBoxState || infoboxState ? 20 : 0) + (hover ? HOVER_DEFAULT_Z_INDEX : 0);
+    const infoBoxZIndex = HOVER_DEFAULT_Z_INDEX - 20 + 1 + (briefBoxState ? 1 : 0);
 
     // initially any map object has left top corner at lat lng coordinates
     // it's on you to set object origin to 0,0 coordinates
@@ -88,9 +95,9 @@ class PropertyMarker extends Component {
     };
 
     const markerClassName = cx(styles.marker, customClassName, {
-      [styles.markerHoverState]: hover,
-      [styles.markerBriefState]: hover && hoverState,
-      [styles.markerInfoboxState]: infoboxState
+      [styles.markerHoverState]: hover && this.alive,
+      [styles.markerBriefState]: briefBoxState && this.alive,
+      [styles.markerInfoboxState]: infoboxState && this.alive
     });
 
     return (
@@ -100,6 +107,7 @@ class PropertyMarker extends Component {
           onMouseEnter={this._onMouseEnterContent}
           onMouseLeave={this._onMouseLeaveContent}
           onClick={this._onClick}
+          style={{ zIndex }}
         >
           <div className={styles.markerText}>{displayPrice}</div>
         </div>
@@ -108,6 +116,7 @@ class PropertyMarker extends Component {
           infoboxState={infoboxState}
           data={data}
           onCloseClick={this.onCloseClick}
+          style={{ zIndex: infoBoxZIndex }}
         />
       </div>
     );
