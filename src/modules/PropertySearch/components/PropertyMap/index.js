@@ -31,6 +31,7 @@ class PropertyMap extends Component {
         apiKey={process.env.GOOGLE_MAP_KEY}
         center={center}
         zoom={zoom}
+        resetBoundsOnResize
         onBoundsChange={this._onBoundsChange}
       >
         {

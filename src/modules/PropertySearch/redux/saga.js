@@ -1,26 +1,24 @@
 import { takeEvery } from 'redux-saga';
-import { call, put, fork } from 'redux-saga/effects';
+import { call, put, fork, select } from 'redux-saga/effects';
 
 // local dependencies
 import { api } from 'services';
 import { makeESParams } from 'utils';
-import * as apiConstants from 'constants/api';
 
+import { selectMapInfo } from './selectors';
 import actions from './actions';
 import {
   PROPERTY_SEARCH_REQUEST,
-  GOOGLE_PLACE_SEARCH_REQUEST
+  GOOGLE_PLACE_SEARCH_REQUEST,
+  SEARCH_MAP_BOUNDS_CHANGE
 } from './constants';
 
-// @TODO select filter from redux store
-export function* propertySearchRequest(postBody) {
-  const payload = {
-    method: 'GET',
-    body: makeESParams(postBody)
-  };
-  const url = apiConstants.SEARCH_API_PATH;
+export function* propertySearchRequest() {
+  const state = yield select();
+  const mapInfo = selectMapInfo(state);
+  const esReq = makeESParams(mapInfo.toJS());
   try {
-    const data = yield call(api.fetchProperties.bind(null, url, payload));
+    const data = yield call(api.fetchProperties.bind(null, esReq.apiPath, esReq.payload));
     yield put(actions.propertySearchSuccess(data));
   } catch (e) {
     yield put(actions.propertySearchError(e));
@@ -37,6 +35,7 @@ export function* googlePlaceSearchRequest(params) {
 }
 
 export default [
+  fork(takeEvery, SEARCH_MAP_BOUNDS_CHANGE, propertySearchRequest),
   fork(takeEvery, PROPERTY_SEARCH_REQUEST, propertySearchRequest),
   fork(takeEvery, GOOGLE_PLACE_SEARCH_REQUEST, googlePlaceSearchRequest),
 ];

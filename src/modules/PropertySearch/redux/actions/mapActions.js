@@ -30,9 +30,17 @@ export function mapToggleHoverIndex(markerIndex) {
   };
 }
 
+export function setCity(city) {
+  return {
+    type: CONSTANTS.SEARCH_MAP_SET_CITY,
+    city
+  };
+}
+
 export default {
   mapBoundsChange,
   mapShowBrief,
   mapToggleInfobox,
   mapToggleHoverIndex,
+  setCity
 };

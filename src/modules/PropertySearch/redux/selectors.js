@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { calcFilteredAndSortedMarkers } from 'modules/PropertySearch/utils';
 
 const selectModule = (state) => state.get('propertySearch');
 
@@ -13,11 +12,8 @@ const selectMarkers = createSelector(
   (substate) => substate.get('markers')
 );
 
-const selectFilteredMarkers = createSelector(
-  selectMapInfo,
-  selectMarkers,
-  (mapInfo, markers) => calcFilteredAndSortedMarkers(markers, mapInfo)
-);
+// use selectFilteredMarkers as alias for now
+const selectFilteredMarkers = selectMarkers;
 
 export default {
   selectModule,

@@ -7,7 +7,7 @@ function getMapSize() {
     return { width: 640, height: 480 };
   }
 
-  return { width: $map.width(), height: $map.height };
+  return { width: $map.width(), height: $map.height() };
 }
 
 export default function (state, action) {

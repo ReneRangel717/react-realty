@@ -9,10 +9,11 @@ import googlePlaceAPISuccessReducer from './googlePlaceAPISuccessReducer';
 
 const initialState = fromJS({
   mapInfo: {
-    center: [59.938043, 30.337157],
-    bounds: [60.325132160343145, 29.13415407031249, 59.546382183279206, 31.54015992968749],
-    marginBounds: [60.2843135300829, 29.21655153124999, 59.58811868963835, 31.45776246874999],
+    center: [26.3683064, -80.1289321],
+    bounds: [26.4249029, -80.0655658, 26.3207559, -80.1710669],
+    marginBounds: [26.4249029, -80.0655658, 26.3207559, -80.1710669],
     zoom: 9,
+    city: 'boca raton'
   },
   markers: [],
   infoBoxIndex: -1, // info box displayed
@@ -26,6 +27,8 @@ function propertySearchReducer(state = initialState, action) {
       return boundsChangeReducer(state, action);
     case CONSTANTS.SEARCH_MAP_SHOW_BRIEF:
       return state.set('hoverState', true);
+    case CONSTANTS.SEARCH_MAP_SET_CITY:
+      return state.update('mapInfo', mapInfo => mapInfo.merge({ city: action.city }));
     case CONSTANTS.SEARCH_MAP_TOGGLE_HOVER_INDEX:
       return state
         .set('hoverIndex', action.hoverIndex)
