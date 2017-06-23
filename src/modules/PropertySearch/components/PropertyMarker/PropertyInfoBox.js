@@ -61,7 +61,7 @@ class PropertyInfoBox extends Component {
     return (
       <div className={boxClassNames}>
         {this.renderCarousel()}
-        <p>{remarks}</p>
+        <p>{remarks.substr(0, 100)}...</p>
       </div>
     );
   }
