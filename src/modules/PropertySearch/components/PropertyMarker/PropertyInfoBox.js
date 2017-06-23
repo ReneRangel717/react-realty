@@ -49,7 +49,7 @@ class PropertyInfoBox extends Component {
 
     const dataObj = data.toJS();
     const {
-      description
+      remarks
     } = dataObj;
 
     const boxClassNames = cx(styles.infoBoxHolder, {
@@ -61,7 +61,7 @@ class PropertyInfoBox extends Component {
     return (
       <div className={boxClassNames}>
         {this.renderCarousel()}
-        <p>{description}</p>
+        <p>{remarks}</p>
       </div>
     );
   }
