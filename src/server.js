@@ -32,7 +32,7 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API
-app.use('/api', proxy(config.apiBaseUrl, {
+app.use('/es-api', proxy(config.apiBaseUrl, {
   // eslint-disable-next-line
   forwardPath: (req, res) => url.parse(req.url).path
 }));
