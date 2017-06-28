@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as CONSTANTS from '../constants';
+import * as CONSTANTS from './constants';
 
 const initialState = fromJS({
   propertyInfo: null,
