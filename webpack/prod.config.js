@@ -19,7 +19,8 @@ module.exports = {
       'font-awesome-webpack!./src/theme/font-awesome.config.prod.js',
       './src/client.js',
       'slick-carousel/slick/slick.css',
-      'slick-carousel/slick/slick-theme.css'
+      'slick-carousel/slick/slick-theme.css',
+      'semantic-ui-css/semantic.min.css'
     ]
   },
   output: {
