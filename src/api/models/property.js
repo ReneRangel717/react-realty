@@ -107,7 +107,7 @@ PropertySchema.pre('init', (next, data) => {
   next();
 });
 
-PropertySchema.virtual('listingPhone').get(() => {
+PropertySchema.virtual('listingPhone').get(function () {
   const nP = (phone) => {
     const result = /([0-9]{3})([0-9]{3})([0-9]{4})$/.exec(phone);
     const resultCode1 = JSON.parse(codes)[result[1]];
@@ -120,17 +120,19 @@ PropertySchema.virtual('listingPhone').get(() => {
   return this.listing_agent && this.listing_agent.phone ? nP(this.listing_agent.phone) : '';
 });
 
-PropertySchema.virtual('n_price').get(() => this.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.00', ''));
+PropertySchema.virtual('n_price').get(function () {
+  return this.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.00', '');
+});
 
-PropertySchema.virtual('price_short').get(() => (
-  this.price >= 1000000 ? `$${Math.round(this.price / 1000000)}M` : `$${Math.round(this.price / 1000)}k`
-));
+PropertySchema.virtual('price_short').get(function () {
+  return this.price >= 1000000 ? `$${Math.round(this.price / 1000000)}M` : `$${Math.round(this.price / 1000)}k`;
+});
 
-PropertySchema.virtual('remarks_short').get(() => (
-  this.remarks ? this.remarks.split('.')[0] : ''
-));
+PropertySchema.virtual('remarks_short').get(function () {
+  return this.remarks ? this.remarks.split('.')[0] : '';
+});
 
-PropertySchema.virtual('n_sold').get(() => {
+PropertySchema.virtual('n_sold').get(function () {
   const obj = {};
 
   if (this.sold && (this.sold.price || this.sold.date || this.sold.ratio)) {
@@ -148,11 +150,11 @@ PropertySchema.virtual('n_sold').get(() => {
   return obj;
 });
 
-PropertySchema.virtual('date_listed').get(() => (
-  this.date && this.date.listed ? normalizeDate(this.date.listed) : ''
-));
+PropertySchema.virtual('date_listed').get(function () {
+  return this.date && this.date.listed ? normalizeDate(this.date.listed) : '';
+});
 
-PropertySchema.virtual('city_link').get(() => {
+PropertySchema.virtual('city_link').get(function () {
   if (this.city) {
     const city = this.city.toLowerCase()
       .replace(/ /g, '_')

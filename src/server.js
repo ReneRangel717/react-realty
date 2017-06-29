@@ -11,6 +11,7 @@ import request from 'request';
 import queryString from 'query-string';
 import { match, createMemoryHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import mongoose from 'mongoose';
 
 import config from './config';
 import configureStore from './redux/store/configureStore';
@@ -19,10 +20,23 @@ import getRoutes from './routes';
 import waitAll from './redux/sagas/waitAll';
 import { selectLocationState } from './redux/selectors';
 import { GOOGLE_PLACE_API_PATH } from './constants/api';
+import propertyAPIRoute from './api/routes/property.routes';
 import { Root } from 'containers';
 
 const app = new Express();
 const server = new http.Server(app);
+
+mongoose.Promise = global.Promise;
+
+// mongodb connection
+mongoose.connect(config.mongoUrl, (err) => {
+  if (err) {
+    console.error('Please check your MongoDB connection parameters');
+    throw err;
+  }
+
+  console.log('Connected to MongoDB');
+});
 
 // disable `X-Powered-By` HTTP header
 app.disable('x-powered-by');
@@ -30,6 +44,9 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
+
+// mongodb API
+app.use('/api', propertyAPIRoute);
 
 // Proxy to API
 app.use('/es-api', proxy(config.apiBaseUrl, {
