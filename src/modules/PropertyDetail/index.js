@@ -8,13 +8,14 @@ import actions from './redux/actions';
 
 class PropertyDetail extends Component {
   componentWillMount() {
-    this.props.loadPropertyDetailRequest(this.props.params.slug);
+    console.log(this.props.params);
+    // this.props.loadPropertyDetailRequest(this.props.params.slug);
   }
 
   render() {
     return (
       <div>
-        {this.props.params.slug}
+        {this.props.params.property}
       </div>
     );
   }

@@ -6,7 +6,8 @@ import {
 } from 'containers';
 import {
   HomePage,
-  PropertySearch
+  PropertySearch,
+  PropertyDetail
 } from './modules/pages';
 
 export default () => {
@@ -14,7 +15,10 @@ export default () => {
     <Route path="/" component={Layout}>
       <IndexRoute component={HomePage} />
       <Route path="s">
-        <Route path=":city" component={PropertySearch} />
+        <Route path=":city">
+          <IndexRoute component={PropertySearch} />
+          <Route path=":property" component={PropertyDetail} />
+        </Route>
       </Route>
       <Route path="/404" component={NotFound} />
       <Route path="*" component={NotFound} />
