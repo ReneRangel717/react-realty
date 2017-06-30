@@ -6,15 +6,33 @@
     .slick-prev {
       left: 5px;
       z-index: 1;
+      background: white;
+      &:before {
+        color: black;
+      }
     }
 
     .slick-next {
       right: 5px;
+      background: white;
+      &:before {
+        color: black;
+      }
     }
+  }
+
+  &.original {
+    width: auto;
+    height: 500px;
   }
 }
 
 .image-sm {
   width: 150px;
   height: 100px;
+}
+
+.image-original {
+  margin: 0 auto;
+  height: 500px;
 }

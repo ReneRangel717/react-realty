@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import cx from 'classnames';
+import { Link } from 'react-router';
 import ImageCarousel from 'components/ImageCarousel';
-
 import styles from './styles/row.scss';
 
 class TableRow extends Component {
@@ -36,12 +36,15 @@ class TableRow extends Component {
     });
     const dataObj = data.toJS();
     const {
-      remarks
+      address,
+      url
     } = dataObj;
 
     return (
       <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
-        <p className={styles.description}>{remarks}</p>
+        <Link to={`/s/${url}`} className={styles.description}>
+          {address}
+        </Link>
         {this.renderCarousel()}
       </div>
     );

@@ -49,7 +49,7 @@ app.use(Express.static(path.join(__dirname, '..', 'static')));
 app.use('/api', propertyAPIRoute);
 
 // Proxy to API
-app.use('/es-api', proxy(config.apiBaseUrl, {
+app.use('/es-api', proxy(config.esApiBaseUrl, {
   // eslint-disable-next-line
   forwardPath: (req, res) => url.parse(req.url).path
 }));

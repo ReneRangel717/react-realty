@@ -23,7 +23,7 @@ function callESApi(endpoint, payload) {
 
   // If request comes from server side, call API url directly.
   if (__SERVER__) {
-    fullUrl = (endpoint.indexOf(config.apiBaseUrl) === -1) ? `${config.apiBaseUrl}/${endpoint}` : endpoint;
+    fullUrl = (endpoint.indexOf(config.esApiBaseUrl) === -1) ? `${config.esApiBaseUrl}/${endpoint}` : endpoint;
   }
 
   return fetch(fullUrl, payload)

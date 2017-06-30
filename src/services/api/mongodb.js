@@ -1,22 +1,16 @@
 import 'isomorphic-fetch';
+import queryString from 'query-string';
 import config from 'config';
-
 import { MONGO_API_PATH } from 'constants/api';
 
-// @TODO update normalize or remove it
-function normalize(result) {
-  return result;
-}
-
-function callAPI(endpoint, payload) {
-  let fullUrl = (endpoint.indexOf(MONGO_API_PATH) === -1) ? `${MONGO_API_PATH}/${endpoint}` : endpoint;
-
-  // If request comes from server side, call API url directly.
+function callAPI(endpoint, slug) {
+  const query = queryString.stringify({ slug });
+  let fullUrl = `${MONGO_API_PATH}/${endpoint}?${query}`;
   if (__SERVER__) {
-    fullUrl = (endpoint.indexOf(config.dbApiBaseUrl) === -1) ? `${config.dbApiBaseUrl}/${endpoint}` : endpoint;
+    fullUrl = (fullUrl.indexOf(config.apiBaseUrl) === -1) ? `${config.apiBaseUrl}${fullUrl}` : fullUrl;
   }
 
-  return fetch(fullUrl, payload)
+  return fetch(fullUrl)
     .then(response =>
       response.json().then(json => ({ json, response }))
     )
@@ -25,10 +19,7 @@ function callAPI(endpoint, payload) {
         return Promise.reject(json);
       }
 
-      return Object.assign(
-        {},
-        { data: normalize(json) },
-      );
+      return json;
     })
     .then(
       response => ({ response }),

@@ -119,7 +119,9 @@ module.exports = {
       'process.env': {
         GOOGLE_ANALYTIC_ID: JSON.stringify(process.env.GOOGLE_ANALYTIC_ID),
         GOOGLE_MAP_KEY: JSON.stringify(process.env.GOOGLE_MAP_KEY),
-        IMG_BASE_URL: JSON.stringify(process.env.IMG_BASE_URL)
+        IMG_BASE_URL: JSON.stringify(process.env.IMG_BASE_URL),
+        HOST: JSON.stringify(process.env.HOST),
+        PORT: JSON.stringify(process.env.PORT)
       },
       __CLIENT__: true,
       __SERVER__: false,

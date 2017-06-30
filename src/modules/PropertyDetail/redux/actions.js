@@ -1,8 +1,9 @@
 import * as CONSTANTS from './constants';
 
-export function loadPropertyDetailRequest() {
+export function loadPropertyDetailRequest(slug) {
   return {
-    type: CONSTANTS.LOAD_PROPERTY_DETAIL_REQUEST
+    type: CONSTANTS.LOAD_PROPERTY_DETAIL_REQUEST,
+    slug
   };
 }
 
@@ -13,7 +14,6 @@ export function loadPropertyDetailSuccess(property) {
   };
 }
 
-// @TODO manipulate various error types
 export function loadPropertyDetailError(error) {
   return {
     type: CONSTANTS.LOAD_PROPERTY_DETAIL_ERROR,
@@ -21,8 +21,24 @@ export function loadPropertyDetailError(error) {
   };
 }
 
+export function setSlug(slug) {
+  return {
+    type: CONSTANTS.SET_SLUG,
+    slug
+  };
+}
+
+export function setLoading(loading) {
+  return {
+    type: CONSTANTS.SET_LOADING,
+    loading
+  };
+}
+
 export default {
   loadPropertyDetailRequest,
   loadPropertyDetailSuccess,
-  loadPropertyDetailError
+  loadPropertyDetailError,
+  setSlug,
+  setLoading
 };

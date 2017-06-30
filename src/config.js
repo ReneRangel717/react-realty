@@ -16,6 +16,7 @@ module.exports = Object.assign({
   port: process.env.PORT || '3000',
   mongoUrl: process.env.MONGO_URL || 'mongodb://localhost:27017/palmettopark-production',
   apiBaseUrl: process.env.API_URL || 'http://localhost',
+  esApiBaseUrl: process.env.ES_API_URL || 'http://localhost',
   googlePlaceAPIKey: process.env.GOOGLE_PLACE_API_KEY || '',
   app: {
     googleAnalytics: {
