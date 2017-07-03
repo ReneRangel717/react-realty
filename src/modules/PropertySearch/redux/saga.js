@@ -16,7 +16,7 @@ import {
 export function* propertySearchRequest() {
   const state = yield select();
   const mapInfo = selectMapInfo(state);
-  const esReq = makeESParams(mapInfo.toJS());
+  const esReq = makeESParams({ location: mapInfo.toJS().bounds });
   try {
     const data = yield call(api.fetchProperties.bind(null, esReq.apiPath, esReq.payload));
     yield put(actions.propertySearchSuccess(data));
