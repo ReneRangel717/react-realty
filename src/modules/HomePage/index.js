@@ -7,7 +7,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>Hello! Welcome to React Realty!</h1>
-        <Link to="/s/boca-raton">Click here to view Boca Raton Map!</Link>
+        <Link to="/home">Click here to view new Map!</Link> <br />
         <SearchBox />
       </div>
     );

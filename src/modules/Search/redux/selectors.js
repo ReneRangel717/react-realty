@@ -17,9 +17,18 @@ const selectSearching = createSelector(
   (substate) => substate.get('searching')
 );
 
+const selectMapInfo = createSelector(
+  selectModule,
+  (substate) => substate.get('mapInfo')
+);
+
+const selectPath = (state) => state.get('route').get('locationBeforeTransitions').pathname;
+
 export default {
   selectModule,
   selectFilters,
   selectProperties,
   selectSearching,
+  selectMapInfo,
+  selectPath
 };

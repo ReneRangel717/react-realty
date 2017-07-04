@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Dropdown } from 'semantic-ui-react';
+import { Search } from 'semantic-ui-react';
 import _ from 'lodash';
+import { getImageUrl, getDisplayPrice } from 'utils';
 
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
@@ -15,31 +16,22 @@ class SearchBox extends Component {
     }
   }
 
-  _renderOption = (property) => {
-    const { address } = property;
-    return <span>{address}</span>;
-  }
-
   render() {
     const { searching, properties } = this.props;
     const onSearchChange = _.debounce(this._onSearchChange, 500);
+
+    // experimental search usage
     const options = properties.toJS().map((property) => ({
-      key: property._id,
-      text: property.address,
-      value: property._id,
-      content: this._renderOption(property)
-    }));
+      title: property.address,
+      image: getImageUrl(property._id, 1, 'sm'),
+      id: property._id,
+      price: getDisplayPrice(property.price)
+    })).slice(0, 5);
+
     return (
-      <Dropdown
-        search
-        selection
-        fluid
-        minCharacters={0}
-        icon="search"
-        placeholder="Search..."
-        options={options}
+      <Search
+        results={options}
         onSearchChange={onSearchChange}
-        disabled={searching}
         loading={searching}
       />
     );

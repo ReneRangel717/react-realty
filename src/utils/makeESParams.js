@@ -35,7 +35,7 @@ const filterType = {
   price: 'range',
   type: 'term',
   sqft: 'range',
-  bounds: 'geo_bounding_box'
+  location: 'geo_bounding_box'
 };
 
 /**

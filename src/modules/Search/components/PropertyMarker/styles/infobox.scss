@@ -1,0 +1,23 @@
+.infoBoxHolder {
+  position: absolute;
+  left: -70px;
+
+  width: 200px;
+  padding: 10px;
+
+  background-color: #FFF;
+  border: 1px solid #d7d7d7;
+  border-radius: 2px;
+
+  box-shadow: 0 2px 4px 0 #AAAAAA;
+}
+
+.infoBoxBriefState {
+  top: -110px;
+  height: 100px;
+}
+
+.infoBoxExpandedState {
+  top: -210px;
+  height: 200px;
+}

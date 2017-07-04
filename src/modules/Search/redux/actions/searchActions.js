@@ -1,4 +1,4 @@
-import * as CONSTANTS from './constants';
+import * as CONSTANTS from '../constants';
 
 // @TODO implement community, city search
 export function esPropertySearchRequest() {

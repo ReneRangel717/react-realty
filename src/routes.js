@@ -6,6 +6,7 @@ import {
 } from 'containers';
 import {
   HomePage,
+  Search,
   PropertySearch,
   PropertyDetail
 } from './modules/pages';
@@ -14,6 +15,7 @@ export default () => {
   const routes = (
     <Route path="/" component={Layout}>
       <IndexRoute component={HomePage} />
+      <Route path="home" component={Search} />
       <Route path="s">
         <Route path=":city">
           <IndexRoute component={PropertySearch} />
