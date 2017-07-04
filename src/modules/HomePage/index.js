@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import SearchBox from 'modules/SearchBox';
+import SearchBox from 'modules/Search/components/SearchBox';
 
 class HomePage extends Component {
   render() {

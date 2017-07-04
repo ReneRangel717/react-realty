@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import _ from 'lodash';
 
-import actions from './redux/actions';
-import selectors from './redux/selectors';
+import actions from 'modules/Search/redux/actions';
+import selectors from 'modules/Search/redux/selectors';
 
 class SearchBox extends Component {
   _onSearchChange = (e, value) => {
