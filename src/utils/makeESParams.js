@@ -5,9 +5,14 @@ const queryMaker = {
   match: (field, value) => ({
     [field]: { query: value, operator: 'and' }
   }),
-  range: (field, gte = 0, lte = 0) => ({
-    [field]: { gte, lte }
-  }),
+  range: (field, value) => {
+    const query = {};
+    if (value[0]) query.gte = value[0];
+    if (value[1]) query.lte = value[1];
+    return {
+      [field]: query
+    };
+  },
   term: (field, value) => ({
     [field]: value
   }),
@@ -26,10 +31,11 @@ const queryMaker = {
 };
 
 const filterType = {
-  query: 'match',
+  address: 'match',
   price: 'range',
   type: 'term',
-  location: 'geo_bounding_box'
+  sqft: 'range',
+  bounds: 'geo_bounding_box'
 };
 
 /**
@@ -47,17 +53,27 @@ export default function makeESParams(params) {
   };
 
   Object.keys(params).forEach((field) => {
+    const value = params[field];
+    const type = filterType[field];
+
     if (!filterType[field]) {
       console.error(`Query maker not found for ${field}`);
       return;
     }
-    const value = params[field];
-    const type = filterType[field];
+
+    if (!value) {
+      return;
+    }
+
+    if (Array.isArray(value) && !value.length) {
+      return;
+    }
+
     const query = {
       [type]: queryMaker[type](field, value)
     };
 
-    if (field === 'query') {
+    if (field === 'address') {
       postBody.query.bool.must.push(query);
     } else {
       postBody.query.bool.filter.push(query);
