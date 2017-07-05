@@ -9,6 +9,7 @@ import path from 'path';
 import url from 'url';
 import request from 'request';
 import queryString from 'query-string';
+import _ from 'lodash';
 import { match, createMemoryHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import mongoose from 'mongoose';
@@ -78,6 +79,15 @@ app.use((req, res) => {
   const history = syncHistoryWithStore(memoryHistory, store, {
     selectLocationState
   });
+  // generate filter state
+  if (req.url.indexOf('/home') === 0) {
+    // only pick available filters
+    const filters = _.pick(req.query, 'type', 'location', 'query', 'price');
+    Object.keys(filters).forEach((filterName) => {
+      const filter = filters[filterName];
+      store.dispatch({ type: 'search/set_filter', filterName, filter });
+    });
+  }
   const allRoutes = getRoutes(store);
   const assets = webpackIsomorphicTools.assets();
 
