@@ -1,15 +1,37 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleMap from 'google-map-react';
+import $ from 'jquery';
+import { fitBounds } from 'google-map-react/utils';
 
 import PropertyMarker from 'modules/Search/components/PropertyMarker';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
 
 class PropertyMap extends Component {
-  _onBoundsChange = (center, zoom, bounds, marginBounds) => {
-    this.props.mapBoundsChange({ center, zoom, bounds, marginBounds });
-    this.props.setFilter('location', bounds);
+  constructor(props) {
+    super(props);
+    this.firstRender = true;
+  }
+
+  _onBoundsChange = (center, zoom, bounds) => {
+    const { location: locationImmutable } = this.props;
+    const location = locationImmutable && locationImmutable.toJS();
+    if (this.firstRender && location && location.length) {
+      // on first render, relocate the map to filter
+      this.firstRender = false;
+      const $map = $('.mapContainer');
+      const size = { width: $map.width(), height: $map.height() };
+      const newBounds = {
+        nw: { lat: location[0], lng: location[1] },
+        se: { lat: location[2], lng: location[3] }
+      };
+      const result = fitBounds(newBounds, size);
+      this.props.mapBoundsChange({ center: result.center, zoom: result.zoom });
+    } else {
+      this.props.mapBoundsChange({ center, zoom });
+      this.props.setFilter('location', bounds.slice(0, 4));
+    }
   }
 
   renderMarker = (marker) => {
@@ -49,11 +71,13 @@ PropertyMap.propTypes = {
   markers: PropTypes.any.isRequired,
   mapBoundsChange: PropTypes.func,
   setFilter: PropTypes.func,
+  location: PropTypes.any,
 };
 
 const mapStatesToProps = (state) => ({
   zoom: selectors.selectMapInfo(state).get('zoom'),
   center: selectors.selectMapInfo(state).get('center').toJS(),
+  location: selectors.selectFilters(state).get('location'),
   markers: selectors.selectProperties(state)
 });
 

@@ -7,7 +7,7 @@ const initialState = fromJS({
     price: [],
     sqft: [],
     type: '',
-    location: [26.4249029, -80.0655658, 26.3207559, -80.1710669],
+    location: null,
     // status,
     // beds,
     // baths,
@@ -23,8 +23,6 @@ const initialState = fromJS({
 
   mapInfo: {
     center: [26.3683064, -80.1289321],
-    bounds: [26.4249029, -80.0655658, 26.3207559, -80.1710669],
-    marginBounds: [26.4249029, -80.0655658, 26.3207559, -80.1710669],
     zoom: 9,
   },
   infoBoxIndex: -1, // info box displayed
@@ -36,8 +34,8 @@ function searchReducer(state = initialState, action) {
   switch (action.type) {
     case CONSTANTS.SEARCH_BOUNDS_CHANGE:
       {
-        const { center, zoom, bounds, marginBounds } = action;
-        return state.update('mapInfo', mapInfo => mapInfo.merge({ center, zoom, bounds, marginBounds }))
+        const { center, zoom } = action;
+        return state.update('mapInfo', mapInfo => mapInfo.merge({ center, zoom }))
           .set('infoBoxIndex', -1)
           .set('briefBoxIndex', -1);
       }
