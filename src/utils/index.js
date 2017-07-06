@@ -4,6 +4,7 @@ import getCommunityImageUrl from './getCommunityImageUrl';
 import makeESParams from './makeESParams';
 import makeUrlSearch from './makeUrlSearch';
 import getSiteUrl from './getSiteUrl';
+import getMapSize from './getMapSize';
 
 export {
   getCommunityImageUrl,
@@ -11,5 +12,6 @@ export {
   getImageUrl,
   getSiteUrl,
   makeESParams,
-  makeUrlSearch
+  makeUrlSearch,
+  getMapSize
 };

@@ -70,11 +70,12 @@ export function setSearching(searching) {
   };
 }
 
-export function setFilter(filterName, filter) {
+export function setFilter(filterName, filter, silent = false) {
   return {
     type: CONSTANTS.SET_FILTER,
     filterName,
-    filter
+    filter,
+    silent
   };
 }
 

@@ -22,3 +22,9 @@ export const SEARCH_BOUNDS_CHANGE = 'search/bounds_change'; // this includes bou
 export const SEARCH_MAP_SHOW_BRIEF = 'search/show_brief';
 export const SEARCH_MAP_TOGGLE_INFOBOX = 'search/toggle_infobox';
 export const SEARCH_MAP_TOGGLE_HOVER_INDEX = 'search/toggle_hover_index';
+
+// google place api
+export const GOOGLE_PLACE_CITY_SEARCH_REQUEST = 'search/google_place_city_search_request';
+export const GOOGLE_PLACE_COMMUNITY_SEARCH_REQUEST = 'search/google_place_community_search_request';
+export const GOOGLE_PLACE_SEARCH_SUCCESS = 'search/google_place_search_success';
+export const GOOGLE_PLACE_SEARCH_ERROR = 'search/google_place_search_error';

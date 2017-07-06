@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleMap from 'google-map-react';
-import $ from 'jquery';
 import { fitBounds } from 'google-map-react/utils';
 
+import { getMapSize } from 'utils';
 import PropertyMarker from 'modules/Search/components/PropertyMarker';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
@@ -20,8 +20,7 @@ class PropertyMap extends Component {
     if (this.firstRender && location && location.length) {
       // on first render, relocate the map to filter
       this.firstRender = false;
-      const $map = $('.mapContainer');
-      const size = { width: $map.width(), height: $map.height() };
+      const size = getMapSize();
       const newBounds = {
         nw: { lat: location[0], lng: location[1] },
         se: { lat: location[2], lng: location[3] }
