@@ -3,8 +3,8 @@ import config from 'config';
 
 import { SEARCH_API_PROXY_ROOT } from 'constants/api';
 
-function normalize(result) {
-  return (result || []).map((property) => {
+const normalizers = {
+  properties: (property) => {
     const { _source, ...otherProps } = property;
     const { location } = _source;
     const [lat, lng] = location.split(',');
@@ -14,6 +14,20 @@ function normalize(result) {
       lat: lat * 1,
       lng: lng * 1
     };
+  },
+  default: (item) => {
+    const { _source, ...otherProps } = item;
+    return {
+      ...otherProps,
+      ..._source
+    };
+  },
+};
+
+function normalize(result) {
+  return (result || []).map((item) => {
+    const normalizer = normalizers[item._index] || normalizers.default;
+    return normalizer(item);
   });
 }
 
@@ -48,4 +62,4 @@ function callESApi(endpoint, payload) {
 }
 
 // api services
-export const fetchProperties = (url, payload) => callESApi(url, payload);
+export const fetchESResult = (url, payload) => callESApi(url, payload);

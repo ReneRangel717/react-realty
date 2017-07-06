@@ -57,6 +57,10 @@ function searchReducer(state = initialState, action) {
       return state.setIn(['filters', action.filterName], fromJS(action.filter));
     case CONSTANTS.ES_PROPERTY_SEARCH_SUCCESS:
       return state.set('properties', fromJS(action.response.data));
+    case CONSTANTS.ES_CITY_SEARCH_SUCCESS:
+      return state.set('cities', fromJS(action.response.data));
+    case CONSTANTS.ES_COMMUNITY_SEARCH_SUCCESS:
+      return state.set('communities', fromJS(action.response.data));
     default:
   }
   return state;

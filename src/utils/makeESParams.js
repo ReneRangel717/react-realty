@@ -1,4 +1,3 @@
-import { SEARCH_API_PATH } from 'constants/api';
 export const DEFAULT_SIZE = 30;
 
 const queryMaker = {
@@ -31,7 +30,9 @@ const queryMaker = {
 };
 
 const filterType = {
+  community: 'match',
   address: 'match',
+  city: 'match',
   price: 'range',
   type: 'term',
   sqft: 'range',
@@ -39,10 +40,8 @@ const filterType = {
 };
 
 /**
- * @param { String } params.city
- * @param { Array[4] } params.bounds
  */
-export default function makeESParams(params) {
+export default function makeESParams(endpoint, params, size = DEFAULT_SIZE) {
   const postBody = {
     query: {
       bool: {
@@ -73,7 +72,7 @@ export default function makeESParams(params) {
       [type]: queryMaker[type](field, value)
     };
 
-    if (field === 'address') {
+    if (field === 'address' || field === 'city' || field === 'community') {
       postBody.query.bool.must.push(query);
     } else {
       postBody.query.bool.filter.push(query);
@@ -81,7 +80,7 @@ export default function makeESParams(params) {
   });
 
   return {
-    apiPath: `${SEARCH_API_PATH}?size=${DEFAULT_SIZE}`,
+    apiPath: `${endpoint}?size=${size}`,
     payload: {
       method: 'POST',
       body: JSON.stringify(postBody)

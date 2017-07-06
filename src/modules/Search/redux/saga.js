@@ -10,7 +10,13 @@ import { makeESParams, makeUrlSearch } from 'utils';
 import { selectFilters, selectPath } from './selectors';
 import actions from './actions';
 import {
-  SET_FILTER
+  CITY_RESULT_LIMIT,
+  COMMUNITY_RESULT_LIMIT
+} from 'constants/api';
+import {
+  SET_FILTER,
+  ES_CITY_SEARCH_REQUEST,
+  ES_COMMUNITY_SEARCH_REQUEST
 } from './constants';
 
 export function* esPropertySearchRequest() {
@@ -24,10 +30,10 @@ export function* esPropertySearchRequest() {
     yield put(push(`${path}?${makeUrlSearch(filterImmutable.toJS())}`));
   }
 
-  const esReq = makeESParams(filters);
+  const esReq = makeESParams('properties/_search', filters);
   yield put(actions.setSearching(true));
   try {
-    const data = yield call(api.fetchProperties.bind(null, esReq.apiPath, esReq.payload));
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload));
     yield put(actions.esPropertySearchSuccess(data));
   } catch (e) {
     yield put(actions.esPropertySearchError(e));
@@ -35,6 +41,42 @@ export function* esPropertySearchRequest() {
   yield put(actions.setSearching(false));
 }
 
+export function* esCitySearchRequest() {
+  const state = yield select();
+  const filterImmutable = selectFilters(state);
+  const query = filterImmutable.toJS().query;
+  const esReq = makeESParams('cities/_search', {
+    city: query
+  });
+  yield put(actions.setSearching(true));
+  try {
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload, CITY_RESULT_LIMIT));
+    yield put(actions.esCitySearchSuccess(data));
+  } catch (e) {
+    yield put(actions.esCitySearchError(e));
+  }
+  yield put(actions.setSearching(false));
+}
+
+export function* esCommunitySearchRequest() {
+  const state = yield select();
+  const filterImmutable = selectFilters(state);
+  const query = filterImmutable.toJS().query;
+  const esReq = makeESParams('communities/_search', {
+    community: query
+  });
+  yield put(actions.setSearching(true));
+  try {
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload, COMMUNITY_RESULT_LIMIT));
+    yield put(actions.esCommunitySearchSuccess(data));
+  } catch (e) {
+    yield put(actions.esCommunitySearchError(e));
+  }
+  yield put(actions.setSearching(false));
+}
+
 export default [
-  fork(takeEvery, SET_FILTER, esPropertySearchRequest)
+  fork(takeEvery, SET_FILTER, esPropertySearchRequest),
+  fork(takeEvery, ES_CITY_SEARCH_REQUEST, esCitySearchRequest),
+  fork(takeEvery, ES_COMMUNITY_SEARCH_REQUEST, esCommunitySearchRequest)
 ];

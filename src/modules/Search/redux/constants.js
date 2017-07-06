@@ -3,6 +3,15 @@ export const ES_PROPERTY_SEARCH_REQUEST = 'search/es_property_search_request';
 export const ES_PROPERTY_SEARCH_SUCCESS = 'search/es_property_search_success';
 export const ES_PROPERTY_SEARCH_ERROR = 'search/es_property_search_error';
 
+export const ES_CITY_SEARCH_REQUEST = 'search/es_city_search_request';
+export const ES_CITY_SEARCH_SUCCESS = 'search/es_city_search_success';
+export const ES_CITY_SEARCH_ERROR = 'search/es_city_search_error';
+
+export const ES_COMMUNITY_SEARCH_REQUEST = 'search/es_community_search_request';
+export const ES_COMMUNITY_SEARCH_SUCCESS = 'search/es_community_search_success';
+export const ES_COMMUNITY_SEARCH_ERROR = 'search/es_community_search_error';
+
+
 export const SET_FILTER = 'search/set_filter';
 export const SET_SEARCHING = 'search/set_searching';
 

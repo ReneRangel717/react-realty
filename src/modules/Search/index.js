@@ -9,6 +9,12 @@ import actions from './redux/actions';
 import styles from './styles.scss';
 
 class PropertySearch extends Component {
+  componentWillMount() {
+    const { esCitySearchRequest, esCommunitySearchRequest } = this.props;
+    esCitySearchRequest();
+    esCommunitySearchRequest();
+  }
+
   render() {
     return (
       <Container fluid className={styles.container}>
@@ -34,14 +40,16 @@ class PropertySearch extends Component {
 }
 
 PropertySearch.propTypes = {
-  esPropertySearchRequest: PropTypes.func.isRequired,
+  esCommunitySearchRequest: PropTypes.func.isRequired,
+  esCitySearchRequest: PropTypes.func.isRequired,
 };
 
 const mapStatesToProps = () => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  esPropertySearchRequest: () => dispatch(actions.esPropertySearchRequest()),
+  esCitySearchRequest: () => dispatch(actions.esCitySearchRequest()),
+  esCommunitySearchRequest: () => dispatch(actions.esCommunitySearchRequest()),
 });
 
 export default connect(mapStatesToProps, mapDispatchToProps)(PropertySearch);
