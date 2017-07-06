@@ -7,8 +7,8 @@ const queryMaker = {
   }),
   range: (field, value) => {
     const query = {};
-    if (value[0]) query.gte = value[0];
-    if (value[1]) query.lte = value[1];
+    if (value[0] * 1) query.gte = value[0] * 1;
+    if (value[1] * 1) query.lte = value[1] * 1;
     return {
       [field]: query
     };

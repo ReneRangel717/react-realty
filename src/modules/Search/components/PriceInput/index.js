@@ -109,7 +109,7 @@ class PriceInput extends Component {
         <Dropdown
           selection
           compact
-          defaultValue={price[0] * 1}
+          defaultValue={price[0] * 1 || 0}
           placeholder="Min Price"
           options={minOptions}
           onChange={this._onMinPriceChange}
@@ -118,7 +118,7 @@ class PriceInput extends Component {
         <Dropdown
           selection
           compact
-          defaultValue={price[1] * 1}
+          defaultValue={price[1] * 1 || 0}
           placeholder="Max Price"
           options={maxOptions}
           onChange={this._onMaxPriceChange}
