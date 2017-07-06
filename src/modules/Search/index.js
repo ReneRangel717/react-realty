@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import cx from 'classnames';
+import { Sidebar, Container } from 'semantic-ui-react';
 
+import SearchToolBar from './components/SearchToolBar';
 import PropertyMap from './components/PropertyMap';
 import PropertyTable from './components/PropertyTable';
 import actions from './redux/actions';
@@ -9,16 +10,25 @@ import styles from './styles.scss';
 
 class PropertySearch extends Component {
   render() {
-    const mapClassName = cx(styles.mapContainer, 'mapContainer'); // mapContainer is used to determine size with jQuery
     return (
-      <div className={styles.container}>
-        <div className={mapClassName}>
-          <PropertyMap />
-        </div>
-        <div className={styles.tableContainer}>
-          <PropertyTable />
-        </div>
-      </div>
+      <Container fluid className={styles.container}>
+        <SearchToolBar />
+        <Container fluid className={styles.mapContainer}>
+          <Sidebar.Pushable>
+            <Sidebar
+              animation="push"
+              width="wide"
+              direction="right"
+              visible
+            >
+              <PropertyTable />
+            </Sidebar>
+            <Sidebar.Pusher className="mapContainer" style={{ height: '100%' }}>
+              <PropertyMap />
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </Container>
+      </Container>
     );
   }
 }

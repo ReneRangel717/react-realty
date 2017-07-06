@@ -7,7 +7,7 @@ import { getImageUrl, getDisplayPrice } from 'utils';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
 
-class SearchBox extends Component {
+class SearchInput extends Component {
   _onSearchChange = (e, value) => {
     const { setFilter, filters } = this.props;
 
@@ -17,7 +17,7 @@ class SearchBox extends Component {
   }
 
   render() {
-    const { searching, properties } = this.props;
+    const { searching, properties, filters } = this.props;
     const onSearchChange = _.debounce(this._onSearchChange, 500);
 
     // experimental search usage
@@ -30,6 +30,7 @@ class SearchBox extends Component {
 
     return (
       <Search
+        defaultValue={filters.get('query')}
         results={options}
         onSearchChange={onSearchChange}
         loading={searching}
@@ -38,7 +39,7 @@ class SearchBox extends Component {
   }
 }
 
-SearchBox.propTypes = {
+SearchInput.propTypes = {
   searching: PropTypes.bool.isRequired,
   properties: PropTypes.any,
   filters: PropTypes.any,
@@ -57,4 +58,4 @@ const mapDispatchToProps = (dispatch) => ({
   esPropertySearchRequest: () => dispatch(actions.esPropertySearchRequest()),
 });
 
-export default connect(mapStatesToProps, mapDispatchToProps)(SearchBox);
+export default connect(mapStatesToProps, mapDispatchToProps)(SearchInput);

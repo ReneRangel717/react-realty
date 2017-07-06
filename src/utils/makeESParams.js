@@ -56,7 +56,7 @@ export default function makeESParams(params) {
     const value = params[field];
     const type = filterType[field];
 
-    if (!filterType[field]) {
+    if (!type) {
       console.error(`Query maker not found for ${field}`);
       return;
     }

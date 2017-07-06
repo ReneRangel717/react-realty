@@ -45,7 +45,7 @@ class TableRow extends Component {
         <Link to={`/s/${url}`} className={styles.description}>
           {address}
         </Link>
-        {this.renderCarousel()}
+        {/* {this.renderCarousel()} */}
       </div>
     );
   }
