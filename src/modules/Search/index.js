@@ -6,6 +6,7 @@ import SearchToolBar from './components/SearchToolBar';
 import PropertyMap from './components/PropertyMap';
 import PropertyTable from './components/PropertyTable';
 import actions from './redux/actions';
+import selectors from './redux/selectors';
 import styles from './styles.scss';
 
 class PropertySearch extends Component {
@@ -26,7 +27,7 @@ class PropertySearch extends Component {
               animation="push"
               width="wide"
               direction="right"
-              visible
+              visible={this.props.sidebar}
             >
               <PropertyTable />
             </Sidebar>
@@ -44,9 +45,11 @@ PropertySearch.propTypes = {
   esCommunitySearchRequest: PropTypes.func.isRequired,
   esCitySearchRequest: PropTypes.func.isRequired,
   esAgentSearchRequest: PropTypes.func.isRequired,
+  sidebar: PropTypes.bool.isRequired
 };
 
-const mapStatesToProps = () => ({
+const mapStatesToProps = (state) => ({
+  sidebar: selectors.selectSidebar(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

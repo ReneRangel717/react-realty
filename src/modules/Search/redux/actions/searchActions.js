@@ -100,6 +100,11 @@ export function setFilter(filterName, filter, silent = false) {
   };
 }
 
+export function toggleSidebar() {
+  return {
+    type: CONSTANTS.TOGGLE_SIDEBAR
+  };
+}
 
 export default {
   esPropertySearchRequest,
@@ -115,5 +120,6 @@ export default {
   esAgentSearchSuccess,
   esAgentSearchError,
   setSearching,
-  setFilter
+  setFilter,
+  toggleSidebar
 };

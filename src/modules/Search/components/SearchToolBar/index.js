@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Button } from 'semantic-ui-react';
 
 import SearchInput from 'modules/Search/components/SearchInput';
 import PriceFilter from 'modules/Search/components/PriceFilter';
@@ -21,6 +21,9 @@ class SearchToolBar extends Component {
         <Menu.Item>
           <TypeFilter />
         </Menu.Item>
+        <Menu.Item position="right">
+          <Button onClick={this.props.toggleSidebar}>Toggle</Button>
+        </Menu.Item>
       </Menu>
     );
   }
@@ -29,6 +32,7 @@ class SearchToolBar extends Component {
 SearchToolBar.propTypes = {
   filters: PropTypes.any,
   setFilter: PropTypes.func.isRequired,
+  toggleSidebar: PropTypes.func.isRequired
 };
 
 const mapStatesToProps = (state) => ({
@@ -36,6 +40,7 @@ const mapStatesToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  toggleSidebar: () => dispatch(actions.toggleSidebar()),
   setFilter: (filterName, filter) => dispatch(actions.setFilter(filterName, filter)),
 });
 

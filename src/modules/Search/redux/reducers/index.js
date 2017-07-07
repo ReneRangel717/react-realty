@@ -26,6 +26,7 @@ const initialState = fromJS({
     center: [26.3683064, -80.1289321],
     zoom: 9,
   },
+  sidebar: true,
   infoBoxIndex: -1, // info box displayed
   hoverIndex: -1, // only hover in table
   hoverState: false, // false: hover, true: brief info
@@ -64,6 +65,8 @@ function searchReducer(state = initialState, action) {
       return state.set('communities', fromJS(action.response.data));
     case CONSTANTS.ES_AGENT_SEARCH_SUCCESS:
       return state.set('agents', fromJS(action.response.data));
+    case CONSTANTS.TOGGLE_SIDEBAR:
+      return state.set('sidebar', !state.get('sidebar'));
     default:
   }
   return state;

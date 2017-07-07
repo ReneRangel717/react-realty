@@ -37,6 +37,11 @@ const selectMapInfo = createSelector(
   (substate) => substate.get('mapInfo')
 );
 
+const selectSidebar = createSelector(
+  selectModule,
+  (substate) => substate.get('sidebar')
+);
+
 const selectPath = (state) => state.get('route').get('locationBeforeTransitions').pathname;
 
 export default {
@@ -48,5 +53,6 @@ export default {
   selectAgents,
   selectSearching,
   selectMapInfo,
+  selectSidebar,
   selectPath
 };
