@@ -1,7 +1,10 @@
 import React, { PropTypes, Component } from 'react';
-import cx from 'classnames';
 import { Link } from 'react-router';
+import cx from 'classnames';
+import { Card, Image } from 'semantic-ui-react';
+import { getImageUrl } from 'utils';
 import ImageCarousel from 'components/ImageCarousel';
+
 import styles from './styles/row.scss';
 
 class TableRow extends Component {
@@ -29,24 +32,30 @@ class TableRow extends Component {
   }
 
   render() {
-    const { data, onHover, onClick, onMouseLeave } = this.props;
+    const { data, onHover, onMouseLeave, onClick } = this.props;
     const { hoverState } = this.state;
-    const rowClassNames = cx(styles.tableRow, {
-      [styles.tableRowHover]: hoverState
-    });
     const dataObj = data.toJS();
     const {
       address,
-      url
+      url,
+      remarks
     } = dataObj;
 
     return (
-      <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
-        <Link to={`/s/${url}`} className={styles.description}>
-          {address}
-        </Link>
-        {/* {this.renderCarousel()} */}
-      </div>
+      <Card
+        raised={hoverState}
+        onMouseEnter={onHover}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+      >
+        <Image src={getImageUrl(`${dataObj._id}-1`, [350, 150])} />
+        <Card.Content className={cx({ [styles.hover]: hoverState })}>
+          <Card.Header>
+            <Link to={`/s/${url}`}>{address}</Link>
+          </Card.Header>
+          <Card.Description>{`${remarks.substr(0, 100)}...`}</Card.Description>
+        </Card.Content>
+      </Card>
     );
   }
 }

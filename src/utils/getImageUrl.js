@@ -13,11 +13,16 @@ export const PIC_SIZE = {
   }
 };
 
-export default function getImageUrl(mlsId, picIndex = 1, size = 'sm') {
+export default function getImageUrl(id, size = 'sm', format = 'jpg') {
   if (size === 'original') {
-    return `${process.env.IMG_BASE_URL}${mlsId}-${picIndex}.jpg`;
+    return `${process.env.IMG_BASE_URL}${id}.${format}`;
+  }
+
+  if (Array.isArray(size)) {
+    const [width, height] = size;
+    return `${process.env.IMG_BASE_URL}${id}-${width}x${height}.${format}`;
   }
 
   const { width, height } = PIC_SIZE[size];
-  return `${process.env.IMG_BASE_URL}${mlsId}-${picIndex}-${width}x${height}.jpg`;
+  return `${process.env.IMG_BASE_URL}${id}-${width}x${height}.${format}`;
 }
