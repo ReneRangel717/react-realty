@@ -57,7 +57,7 @@ class SearchInput extends Component {
     const communityResult = communities.map((community) => ({
       title: community.community,
       id: community._id,
-      image: getImageUrl(`communities/${community.image}`, 'original'),
+      image: getImageUrl(`community_images/${community.image}`, 'original', ''),
       type: 'community',
       address: `${community.city}, ${community.state}`
     })).slice(0, COMMUNITY_RESULT_LIMIT);

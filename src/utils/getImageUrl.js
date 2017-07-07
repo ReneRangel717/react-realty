@@ -13,16 +13,17 @@ export const PIC_SIZE = {
   }
 };
 
-export default function getImageUrl(id, size = 'sm', format = 'jpg') {
+export default function getImageUrl(id, size = 'sm', fileFormat = 'jpg') {
+  const format = fileFormat ? `.${fileFormat}` : '';
   if (size === 'original') {
-    return `${process.env.IMG_BASE_URL}${id}.${format}`;
+    return `${process.env.IMG_BASE_URL}${id}${format}`;
   }
 
   if (Array.isArray(size)) {
     const [width, height] = size;
-    return `${process.env.IMG_BASE_URL}${id}-${width}x${height}.${format}`;
+    return `${process.env.IMG_BASE_URL}${id}-${width}x${height}${format}`;
   }
 
   const { width, height } = PIC_SIZE[size];
-  return `${process.env.IMG_BASE_URL}${id}-${width}x${height}.${format}`;
+  return `${process.env.IMG_BASE_URL}${id}-${width}x${height}${format}`;
 }
