@@ -42,7 +42,28 @@ export function esCitySearchError(error) {
   };
 }
 
-// community search
+// agent search
+export function esAgentSearchRequest() {
+  return {
+    type: CONSTANTS.ES_AGENT_SEARCH_REQUEST
+  };
+}
+
+export function esAgentSearchSuccess(data) {
+  return {
+    type: CONSTANTS.ES_AGENT_SEARCH_SUCCESS,
+    ...data
+  };
+}
+
+export function esAgentSearchError(error) {
+  return {
+    type: CONSTANTS.ES_AGENT_SEARCH_ERROR,
+    error
+  };
+}
+
+// agent search
 export function esCommunitySearchRequest() {
   return {
     type: CONSTANTS.ES_COMMUNITY_SEARCH_REQUEST
@@ -90,6 +111,9 @@ export default {
   esCommunitySearchRequest,
   esCommunitySearchSuccess,
   esCommunitySearchError,
+  esAgentSearchRequest,
+  esAgentSearchSuccess,
+  esAgentSearchError,
   setSearching,
   setFilter
 };

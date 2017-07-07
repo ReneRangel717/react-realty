@@ -26,13 +26,17 @@ const queryMaker = {
         lon: bounds[3]
       }
     }
+  }),
+  regexp: (field, value) => ({
+    [field]: `${value}.*`
   })
 };
 
 const filterType = {
-  community: 'match',
-  address: 'match',
-  city: 'match',
+  community: 'regexp',
+  address: 'regexp',
+  name: 'regexp',
+  city: 'regexp',
   price: 'range',
   type: 'term',
   sqft: 'range',

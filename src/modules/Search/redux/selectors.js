@@ -22,6 +22,11 @@ const selectCommunities = createSelector(
   (substate) => substate.get('communities')
 );
 
+const selectAgents = createSelector(
+  selectModule,
+  (substate) => substate.get('agents')
+);
+
 const selectSearching = createSelector(
   selectModule,
   (substate) => substate.get('searching')
@@ -40,6 +45,7 @@ export default {
   selectProperties,
   selectCities,
   selectCommunities,
+  selectAgents,
   selectSearching,
   selectMapInfo,
   selectPath

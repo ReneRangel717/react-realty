@@ -14,7 +14,7 @@ class ImageCarousel extends Component {
   _customPaging = (index) => {
     const { id } = this.props;
     return (
-      <a><img src={getImageUrl(id, index + 1, 'xs')} alt={`pager-${index}`} /></a>
+      <a><img src={getImageUrl(`${id}-${index + 1}`, 'xs')} alt={`pager-${index}`} /></a>
     );
   }
 
@@ -23,7 +23,7 @@ class ImageCarousel extends Component {
     const className = styles[`image-${size}`];
     return new Array(picCount).fill(1).map((v, index) => (
       <div key={`id-${index}`}>
-        <img className={className} src={getImageUrl(id, index + 1, size)} alt={`id-${index}`} />
+        <img className={className} src={getImageUrl(`${id}-${index + 1}`, size)} alt={`id-${index}`} />
       </div>
     ));
   }

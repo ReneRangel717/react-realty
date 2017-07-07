@@ -11,12 +11,14 @@ import { selectFilters, selectPath } from './selectors';
 import actions from './actions';
 import {
   CITY_RESULT_LIMIT,
-  COMMUNITY_RESULT_LIMIT
+  COMMUNITY_RESULT_LIMIT,
+  AGENT_RESULT_LIMIT
 } from 'constants/api';
 import {
   SET_FILTER,
   ES_CITY_SEARCH_REQUEST,
   ES_COMMUNITY_SEARCH_REQUEST,
+  ES_AGENT_SEARCH_REQUEST,
   GOOGLE_PLACE_CITY_SEARCH_REQUEST,
   GOOGLE_PLACE_COMMUNITY_SEARCH_REQUEST
 } from './constants';
@@ -55,10 +57,10 @@ export function* esCitySearchRequest() {
   const query = filterImmutable.toJS().query;
   const esReq = makeESParams('cities/_search', {
     city: query
-  });
+  }, CITY_RESULT_LIMIT);
   yield put(actions.setSearching(true));
   try {
-    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload, CITY_RESULT_LIMIT));
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload));
     yield put(actions.esCitySearchSuccess(data));
   } catch (e) {
     yield put(actions.esCitySearchError(e));
@@ -73,13 +75,31 @@ export function* esCommunitySearchRequest() {
   const query = filterImmutable.toJS().query;
   const esReq = makeESParams('communities/_search', {
     community: query
-  });
+  }, COMMUNITY_RESULT_LIMIT);
   yield put(actions.setSearching(true));
   try {
-    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload, COMMUNITY_RESULT_LIMIT));
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload));
     yield put(actions.esCommunitySearchSuccess(data));
   } catch (e) {
     yield put(actions.esCommunitySearchError(e));
+  }
+  yield put(actions.setSearching(false));
+}
+
+// agent search
+export function* esAgentSearchRequest() {
+  const state = yield select();
+  const filterImmutable = selectFilters(state);
+  const query = filterImmutable.toJS().query;
+  const esReq = makeESParams('agents/_search', {
+    name: query
+  }, AGENT_RESULT_LIMIT);
+  yield put(actions.setSearching(true));
+  try {
+    const data = yield call(api.fetchESResult.bind(null, esReq.apiPath, esReq.payload));
+    yield put(actions.esAgentSearchSuccess(data));
+  } catch (e) {
+    yield put(actions.esAgentSearchError(e));
   }
   yield put(actions.setSearching(false));
 }
@@ -134,6 +154,7 @@ export default [
   fork(takeEvery, SET_FILTER, esPropertySearchRequest),
   fork(takeEvery, ES_CITY_SEARCH_REQUEST, esCitySearchRequest),
   fork(takeEvery, ES_COMMUNITY_SEARCH_REQUEST, esCommunitySearchRequest),
+  fork(takeEvery, ES_AGENT_SEARCH_REQUEST, esAgentSearchRequest),
   fork(takeEvery, GOOGLE_PLACE_CITY_SEARCH_REQUEST, googlePlaceCitySearchRequest),
   fork(takeEvery, GOOGLE_PLACE_COMMUNITY_SEARCH_REQUEST, googlePlaceCommunitySearchRequest)
 ];

@@ -10,9 +10,10 @@ import styles from './styles.scss';
 
 class PropertySearch extends Component {
   componentWillMount() {
-    const { esCitySearchRequest, esCommunitySearchRequest } = this.props;
+    const { esCitySearchRequest, esCommunitySearchRequest, esAgentSearchRequest } = this.props;
     esCitySearchRequest();
     esCommunitySearchRequest();
+    esAgentSearchRequest();
   }
 
   render() {
@@ -42,6 +43,7 @@ class PropertySearch extends Component {
 PropertySearch.propTypes = {
   esCommunitySearchRequest: PropTypes.func.isRequired,
   esCitySearchRequest: PropTypes.func.isRequired,
+  esAgentSearchRequest: PropTypes.func.isRequired,
 };
 
 const mapStatesToProps = () => ({
@@ -50,6 +52,7 @@ const mapStatesToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
   esCitySearchRequest: () => dispatch(actions.esCitySearchRequest()),
   esCommunitySearchRequest: () => dispatch(actions.esCommunitySearchRequest()),
+  esAgentSearchRequest: () => dispatch(actions.esAgentSearchRequest()),
 });
 
 export default connect(mapStatesToProps, mapDispatchToProps)(PropertySearch);

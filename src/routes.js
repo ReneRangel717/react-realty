@@ -8,7 +8,8 @@ import {
   HomePage,
   Search,
   PropertySearch,
-  PropertyDetail
+  PropertyDetail,
+  AgentDetail
 } from './modules/pages';
 
 export default () => {
@@ -21,6 +22,9 @@ export default () => {
           <IndexRoute component={PropertySearch} />
           <Route path=":property" component={PropertyDetail} />
         </Route>
+      </Route>
+      <Route path="realtors">
+        <Route path=":agent" component={AgentDetail} />
       </Route>
       <Route path="/404" component={NotFound} />
       <Route path="*" component={NotFound} />

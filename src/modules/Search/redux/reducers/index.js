@@ -19,6 +19,7 @@ const initialState = fromJS({
   properties: [],
   cities: [],
   communities: [],
+  agents: [],
   searching: false,
 
   mapInfo: {
@@ -61,6 +62,8 @@ function searchReducer(state = initialState, action) {
       return state.set('cities', fromJS(action.response.data));
     case CONSTANTS.ES_COMMUNITY_SEARCH_SUCCESS:
       return state.set('communities', fromJS(action.response.data));
+    case CONSTANTS.ES_AGENT_SEARCH_SUCCESS:
+      return state.set('agents', fromJS(action.response.data));
     default:
   }
   return state;

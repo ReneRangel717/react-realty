@@ -3,24 +3,26 @@ import { connect } from 'react-redux';
 import { Search } from 'semantic-ui-react';
 import _ from 'lodash';
 import { push } from 'react-router-redux';
-import { getImageUrl, getDisplayPrice, getCommunityImageUrl } from 'utils';
+import { getImageUrl, getDisplayPrice } from 'utils';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
 
 import {
   PROPERTY_RESULT_LIMIT,
   CITY_RESULT_LIMIT,
-  COMMUNITY_RESULT_LIMIT
+  COMMUNITY_RESULT_LIMIT,
+  AGENT_RESULT_LIMIT
 } from 'constants/api';
 
 class SearchInput extends Component {
   _onSearchChange = (e, value) => {
-    const { setFilter, filters, esCitySearchRequest, esCommunitySearchRequest } = this.props;
+    const { setFilter, filters, esCitySearchRequest, esCommunitySearchRequest, esAgentSearchRequest } = this.props;
 
     if (filters.get('query') !== value) {
       setFilter('query', value);
       esCitySearchRequest();
       esCommunitySearchRequest();
+      esAgentSearchRequest();
     }
   }
 
@@ -37,11 +39,14 @@ class SearchInput extends Component {
       case 'property':
         this.props.dispatch(push(`/s/${value.url}`));
         break;
+      case 'agent':
+        this.props.dispatch(push(`/realtors/${value.id}`));
+        break;
       default:
     }
   }
 
-  _getResults = (cities, communities, properties) => {
+  _getResults = (cities, communities, agents, properties) => {
     const result = {};
     const cityResult = cities.map((city) => ({
       title: `${city.city}, ${city.state}`,
@@ -52,19 +57,27 @@ class SearchInput extends Component {
     const communityResult = communities.map((community) => ({
       title: community.community,
       id: community._id,
-      image: getCommunityImageUrl(community.image),
+      image: getImageUrl(`communities/${community.image}`, 'original'),
       type: 'community',
       address: `${community.city}, ${community.state}`
     })).slice(0, COMMUNITY_RESULT_LIMIT);
 
     const propertyResult = properties.map((property) => ({
       title: property.address,
-      image: getImageUrl(property._id, 1, 'sm'),
+      image: getImageUrl(`${property._id}-1`, 'sm'),
       id: property._id,
       price: getDisplayPrice(property.price),
       type: 'property',
       url: property.url
     })).slice(0, PROPERTY_RESULT_LIMIT);
+
+    const agentResult = agents.map((agent) => ({
+      title: agent.name,
+      id: agent.user,
+      type: 'agent',
+      image: getImageUrl(`agents/${agent.user}`, [100, 100], 'png')
+    })).slice(0, AGENT_RESULT_LIMIT);
+
 
     if (cityResult.length) {
       result.cities = {
@@ -87,15 +100,22 @@ class SearchInput extends Component {
       };
     }
 
+    if (agentResult.length) {
+      result.agents = {
+        name: 'Agent',
+        results: agentResult
+      };
+    }
+
     return result;
   };
 
   render() {
-    const { searching, cities, properties, communities, filters } = this.props;
+    const { searching, cities, properties, communities, filters, agents } = this.props;
     const onSearchChange = _.debounce(this._onSearchChange, 100);
 
     // experimental search usage
-    const results = this._getResults(cities.toJS(), communities.toJS(), properties.toJS());
+    const results = this._getResults(cities.toJS(), communities.toJS(), agents.toJS(), properties.toJS());
 
     return (
       <Search
@@ -115,10 +135,12 @@ SearchInput.propTypes = {
   properties: PropTypes.any,
   cities: PropTypes.any,
   communities: PropTypes.any,
+  agents: PropTypes.any,
   filters: PropTypes.any,
   setFilter: PropTypes.func.isRequired,
   esCitySearchRequest: PropTypes.func.isRequired,
   esCommunitySearchRequest: PropTypes.func.isRequired,
+  esAgentSearchRequest: PropTypes.func.isRequired,
   googlePlaceCitySearchRequest: PropTypes.func.isRequired,
   googlePlaceCommunitySearchRequest: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
@@ -129,7 +151,8 @@ const mapStatesToProps = (state) => ({
   searching: selectors.selectSearching(state),
   properties: selectors.selectProperties(state),
   cities: selectors.selectCities(state),
-  communities: selectors.selectCommunities(state)
+  communities: selectors.selectCommunities(state),
+  agents: selectors.selectAgents(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -137,6 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
   setFilter: (filterName, filter) => dispatch(actions.setFilter(filterName, filter)),
   esCitySearchRequest: () => dispatch(actions.esCitySearchRequest()),
   esCommunitySearchRequest: () => dispatch(actions.esCommunitySearchRequest()),
+  esAgentSearchRequest: () => dispatch(actions.esAgentSearchRequest()),
   googlePlaceCitySearchRequest: (city) => dispatch(actions.googlePlaceCitySearchRequest(city)),
   googlePlaceCommunitySearchRequest: (community, address) => dispatch(actions.googlePlaceCommunitySearchRequest(community, address)),
 });

@@ -46,7 +46,7 @@ class PropertyDetail extends Component {
           <meta property="og:title" content={address} />
           <meta property="og:description" content={remarks} />
           <meta property="og:type" content="place" />
-          <meta property="og:image" content={getImageUrl(mlsid, 1, 'original')} />
+          <meta property="og:image" content={getImageUrl(`${mlsid}-1`, 'original')} />
           <meta property="og:site_name" content="palmettopark.com" />
           <meta property="og:street-address" content={address} />
           <meta property="og:locality" content={community} />
