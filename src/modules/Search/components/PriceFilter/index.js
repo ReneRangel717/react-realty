@@ -19,7 +19,7 @@ const defaultPrices = (() => {
   return prices;
 })();
 
-class PriceInput extends Component {
+class PriceFilter extends Component {
   _onPriceChange = (val, name = 'min') => {
     const { filters, setFilter } = this.props;
     let price = filters.get('price');
@@ -128,7 +128,7 @@ class PriceInput extends Component {
   }
 }
 
-PriceInput.propTypes = {
+PriceFilter.propTypes = {
   filters: PropTypes.any,
   setFilter: PropTypes.func.isRequired,
 };
@@ -141,4 +141,4 @@ const mapDispatchToProps = (dispatch) => ({
   setFilter: (filterName, filter) => dispatch(actions.setFilter(filterName, filter)),
 });
 
-export default connect(mapStatesToProps, mapDispatchToProps)(PriceInput);
+export default connect(mapStatesToProps, mapDispatchToProps)(PriceFilter);

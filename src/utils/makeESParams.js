@@ -2,7 +2,7 @@ export const DEFAULT_SIZE = 30;
 
 const queryMaker = {
   match: (field, value) => ({
-    [field]: { query: value, operator: 'and' }
+    [field]: value
   }),
   range: (field, value) => {
     const query = {};
@@ -38,7 +38,7 @@ const filterType = {
   name: 'regexp',
   city: 'regexp',
   price: 'range',
-  type: 'term',
+  type: 'match',
   sqft: 'range',
   location: 'geo_bounding_box'
 };

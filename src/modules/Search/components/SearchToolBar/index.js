@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
 import SearchInput from 'modules/Search/components/SearchInput';
-import PriceInput from 'modules/Search/components/PriceInput';
+import PriceFilter from 'modules/Search/components/PriceFilter';
+import TypeFilter from 'modules/Search/components/TypeFilter';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
 
@@ -15,7 +16,10 @@ class SearchToolBar extends Component {
           <SearchInput />
         </Menu.Item>
         <Menu.Item>
-          <PriceInput />
+          <PriceFilter />
+        </Menu.Item>
+        <Menu.Item>
+          <TypeFilter />
         </Menu.Item>
       </Menu>
     );
