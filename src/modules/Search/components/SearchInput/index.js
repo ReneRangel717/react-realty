@@ -33,11 +33,12 @@ class SearchInput extends Component {
         this.props.googlePlaceCitySearchRequest(value.title);
         break;
       case 'community':
-        this.props.setFilter('query', '', true);
-        this.props.googlePlaceCommunitySearchRequest(value.title, value.address);
+        this.props.dispatch(push('/boca-raton/boca_pointe')); // hard coded for now until url provided by ES result
+        // this.props.setFilter('query', '', true);
+        // this.props.googlePlaceCommunitySearchRequest(value.title, value.address);
         break;
       case 'property':
-        this.props.dispatch(push(`/s/${value.url}`));
+        this.props.dispatch(push(`/${value.url}`));
         break;
       case 'agent':
         this.props.dispatch(push(`/realtors/${value.id}`));

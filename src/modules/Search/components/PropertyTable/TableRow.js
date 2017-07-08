@@ -51,7 +51,7 @@ class TableRow extends Component {
         <Image src={getImageUrl(`${dataObj._id}-1`, [350, 150])} />
         <Card.Content className={cx({ [styles.hover]: hoverState })}>
           <Card.Header>
-            <Link to={`/s/${url}`}>{address}</Link>
+            <Link to={`/${url}`}>{address}</Link>
           </Card.Header>
           <Card.Description>{`${remarks.substr(0, 100)}...`}</Card.Description>
         </Card.Content>

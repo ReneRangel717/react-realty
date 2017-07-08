@@ -4,6 +4,7 @@ import makeESParams from './makeESParams';
 import makeUrlSearch from './makeUrlSearch';
 import getSiteUrl from './getSiteUrl';
 import getMapSize from './getMapSize';
+import decideProperty from './decideProperty';
 
 export {
   getDisplayPrice,
@@ -11,5 +12,6 @@ export {
   getSiteUrl,
   makeESParams,
   makeUrlSearch,
-  getMapSize
+  getMapSize,
+  decideProperty
 };

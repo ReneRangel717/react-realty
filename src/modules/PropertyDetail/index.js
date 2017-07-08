@@ -9,14 +9,11 @@ import getSiteUrl from 'utils/getSiteUrl';
 import getImageUrl from 'utils/getImageUrl';
 import actions from './redux/actions';
 import selectors from './redux/selectors';
-import {
-  loadPropertyDetailRequest as loadPropertyDetailSaga,
-} from './redux/saga';
 
 class PropertyDetail extends Component {
   componentWillMount() {
-    const { city, property } = this.props.params;
-    this.props.loadPropertyDetailRequest(`${city}/${property}`);
+    const { city, slug } = this.props.params;
+    this.props.loadPropertyDetailRequest(`${city}/${slug}`);
   }
 
   render() {
@@ -59,10 +56,6 @@ class PropertyDetail extends Component {
     );
   }
 }
-
-PropertyDetail.preload = ({ city, property }) => ([
-  [loadPropertyDetailSaga, { slug: `${city}/${property}` }]
-]);
 
 PropertyDetail.propTypes = {
   propertyInfo: PropTypes.any.isRequired,

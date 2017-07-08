@@ -42,7 +42,7 @@ class TableRow extends Component {
 
     return (
       <div className={rowClassNames} onMouseEnter={onHover} onMouseLeave={onMouseLeave} onClick={onClick}>
-        <Link to={`/s/${url}`} className={styles.description}>
+        <Link to={`/${url}`} className={styles.description}>
           {address}
         </Link>
         {this.renderCarousel()}
