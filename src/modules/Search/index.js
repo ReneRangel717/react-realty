@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Sidebar, Container } from 'semantic-ui-react';
+import cx from 'classnames';
+import { Sidebar, Container, Grid } from 'semantic-ui-react';
 
 import SearchToolBar from './components/SearchToolBar';
 import PropertyMap from './components/PropertyMap';
@@ -19,20 +20,28 @@ class PropertySearch extends Component {
 
   render() {
     return (
-      <Container fluid className={styles.container}>
+      <Container fluid className={styles.flexContainer}>
         <SearchToolBar />
-        <Container fluid className={styles.mapContainer}>
+        <Container fluid className={styles.flexRow}>
           <Sidebar.Pushable>
             <Sidebar
               animation="push"
               width="wide"
               direction="right"
               visible={this.props.sidebar}
+              style={{ width: '100%' }}
             >
               <PropertyTable />
             </Sidebar>
-            <Sidebar.Pusher className="mapContainer" style={{ height: '100%' }}>
-              <PropertyMap />
+            <Sidebar.Pusher style={{ height: '100%' }}>
+              <Grid style={{ height: '100%' }}>
+                <Grid.Column width={16} computer={12} className={cx('mapContainer', styles.mapColumn)}>
+                  <PropertyMap />
+                </Grid.Column>
+                <Grid.Column computer={4} only="computer" className={styles.tableColumn}>
+                  <PropertyTable />
+                </Grid.Column>
+              </Grid>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </Container>

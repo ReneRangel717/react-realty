@@ -26,7 +26,7 @@ const initialState = fromJS({
     center: [26.3683064, -80.1289321],
     zoom: 9,
   },
-  sidebar: true,
+  sidebar: false,
   infoBoxIndex: -1, // info box displayed
   hoverIndex: -1, // only hover in table
   hoverState: false, // false: hover, true: brief info
