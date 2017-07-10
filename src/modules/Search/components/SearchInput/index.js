@@ -4,6 +4,7 @@ import { Search } from 'semantic-ui-react';
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 import { getImageUrl, getDisplayPrice } from 'utils';
+import { getSlug } from 'utils/slug';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
 
@@ -33,9 +34,8 @@ class SearchInput extends Component {
         this.props.googlePlaceCitySearchRequest(value.title);
         break;
       case 'community':
-        this.props.dispatch(push('/boca-raton/boca_pointe')); // hard coded for now until url provided by ES result
-        // this.props.setFilter('query', '', true);
-        // this.props.googlePlaceCommunitySearchRequest(value.title, value.address);
+        this.props.dispatch(push(`/${getSlug(value.city)}/${getSlug(value.title)}`));
+        this.props.setFilter('query', '', true);
         break;
       case 'property':
         this.props.dispatch(push(`/${value.url}`));
@@ -60,6 +60,7 @@ class SearchInput extends Component {
       id: community._id,
       image: getImageUrl(`community_images/${community.image}`, 'original', ''),
       type: 'community',
+      city: community.city,
       address: `${community.city}, ${community.state}`
     })).slice(0, COMMUNITY_RESULT_LIMIT);
 

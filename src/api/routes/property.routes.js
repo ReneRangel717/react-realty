@@ -3,7 +3,7 @@ import * as PropertyController from '../controllers/property.controller';
 
 const router = new Router();
 
-router.route('/property')
+router.route('/')
   .get(PropertyController.getProperty);
 
 export default router;

@@ -6,25 +6,25 @@ import { api } from 'services';
 import actions from './actions';
 import selectors from './selectors';
 import {
-  LOAD_PROPERTY_DETAIL_REQUEST,
+  LOAD_COMMUNITY_DETAIL_REQUEST,
 } from './constants';
 
-export function* loadPropertyDetailRequest({ slug }) {
+export function* loadCommunityDetailRequest({ slug }) {
   try {
     const state = yield select();
     const currentSlug = selectors.selectSlug(state);
 
     if (currentSlug !== slug) {
-      const data = yield call(api.callMongoAPI.bind(null, 'property', slug));
-      yield put(actions.loadPropertyDetailSuccess(data.response));
+      const data = yield call(api.callMongoAPI.bind(null, 'community', slug));
+      yield put(actions.loadCommunityDetailSuccess(data.response));
       yield put(actions.setSlug(slug));
     }
   } catch (e) {
-    yield put(actions.loadPropertyDetailError(e));
+    yield put(actions.loadCommunityDetailError(e));
   }
   yield put(actions.setLoading(false));
 }
 
 export default [
-  fork(takeEvery, LOAD_PROPERTY_DETAIL_REQUEST, loadPropertyDetailRequest),
+  fork(takeEvery, LOAD_COMMUNITY_DETAIL_REQUEST, loadCommunityDetailRequest),
 ];

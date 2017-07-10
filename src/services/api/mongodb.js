@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import config from 'config';
 import { MONGO_API_PATH } from 'constants/api';
 
-function callAPI(endpoint, slug) {
+export function callMongoAPI(endpoint, slug) {
   const query = queryString.stringify({ slug });
   let fullUrl = `${MONGO_API_PATH}/${endpoint}?${query}`;
   if (__SERVER__) {
@@ -26,6 +26,3 @@ function callAPI(endpoint, slug) {
       error => ({ error: error.message || 'Something bad happened.' })
     );
 }
-
-// api services
-export const fetchPropertyDetail = (url, payload) => callAPI(url, payload);

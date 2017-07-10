@@ -21,7 +21,7 @@ import getRoutes from './routes';
 import waitAll from './redux/sagas/waitAll';
 import { selectLocationState } from './redux/selectors';
 import { GOOGLE_PLACE_API_PATH } from './constants/api';
-import propertyAPIRoute from './api/routes/property.routes';
+import mongoDBRoutes from './api/routes';
 import { Root } from 'containers';
 
 const app = new Express();
@@ -47,7 +47,7 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // mongodb API
-app.use('/api', propertyAPIRoute);
+app.use('/api', mongoDBRoutes);
 
 // Proxy to API
 app.use('/es-api', proxy(config.esApiBaseUrl, {

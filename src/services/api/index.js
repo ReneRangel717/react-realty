@@ -1,9 +1,9 @@
 import { fetchESResult } from './elastic-search';
 import { callGooglePlaceAPI } from './google-place-search';
-import { fetchPropertyDetail } from './mongodb';
+import { callMongoAPI } from './mongodb';
 
 export {
   fetchESResult,
   callGooglePlaceAPI,
-  fetchPropertyDetail
+  callMongoAPI
 };

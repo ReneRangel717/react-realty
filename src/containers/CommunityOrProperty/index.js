@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import CommunityDetail from 'modules/CommunityDetail';
 import PropertyDetail from 'modules/PropertyDetail';
 import { decideProperty } from 'utils';
-import {
-  loadPropertyDetailRequest as loadPropertyDetailSaga,
-} from 'modules/PropertyDetail/redux/saga';
+import { loadPropertyDetailRequest as loadPropertyDetailSaga } from 'modules/PropertyDetail/redux/saga';
+import { loadCommunityDetailRequest as loadCommunityDetailSaga } from 'modules/CommunityDetail/redux/saga';
 
 class CommunityOrProperty extends Component {
   render() {
@@ -20,7 +19,8 @@ class CommunityOrProperty extends Component {
 }
 
 CommunityOrProperty.preload = ({ city, slug }) => ([
-  [loadPropertyDetailSaga, { slug: `${city}/${slug}` }]
+  [loadPropertyDetailSaga, { slug: `${city}/${slug}` }],
+  [loadCommunityDetailSaga, { slug: `${city}/${slug}` }]
 ]);
 
 CommunityOrProperty.propTypes = {
