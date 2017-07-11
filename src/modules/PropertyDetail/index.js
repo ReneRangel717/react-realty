@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Header, Container, Segment, Label, Image, Item, Grid } from 'semantic-ui-react';
+import { Header, Container, Segment, Label, Image, Item, Grid, Button, Menu } from 'semantic-ui-react';
 
 import Helmet from 'react-helmet';
 
@@ -43,8 +43,6 @@ class PropertyDetail extends Component {
       sqft
     } = property;
 
-    console.log(property);
-
     return (
       <Container>
         <Helmet>
@@ -61,7 +59,7 @@ class PropertyDetail extends Component {
           <meta property="og:locality" content={community} />
           <meta property="og:region" content={city} />
         </Helmet>
-        <Segment raised>
+        <Segment raised className={styles.mainSegment}>
           <Label as="a" color="red" ribbon>Just Listed</Label>
           <Header className={styles.header}>
             <Grid>
@@ -91,9 +89,23 @@ class PropertyDetail extends Component {
                   <strong>{sqft}</strong> Sq.Ft <br></br> $128/Sq.Ft
                 </Segment>
               </Grid.Column>
-              <Grid.Column width={3}>
+              <Grid.Column width={3} className={styles.btnGroup}>
+                <Button basic icon="heart" content="" />
+                <Button basic icon="close" content="" />
+                <Button basic icon="share" content="" />
               </Grid.Column>
             </Grid>
+            <Menu text className={styles.menuItems}>
+              <Menu.Item name="Overview" />
+              <Menu.Item name="Property Details" />
+              <Menu.Item name="Tour Insights" />
+              <Menu.Item name="Redfin Estimate" />
+              <Menu.Item name="Property History" />
+              <Menu.Item name="Public Facts" />
+              <Menu.Item name="Schools" />
+              <Menu.Item name="Neighborhood" />
+              <Menu.Item name="Similar Homes" />
+            </Menu>
           </Header>
           <p>{remarks}</p>
           <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />

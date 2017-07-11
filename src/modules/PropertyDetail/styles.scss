@@ -1,5 +1,5 @@
-.page_container {
-	display: block;
+.mainSegment {
+	left: 150px;
 }
 
 .header {
@@ -23,7 +23,7 @@
 
 	background: #eee;
 	margin: 10px 0 !important;
-	padding: 20px 30px !important;
+	padding: 20px 20px !important;
 
 	.description, .title {
 		margin: 0px;
@@ -36,5 +36,17 @@
 		&:not(:first-child) {
 			border-left: 1px solid #ddd;
 		}
+	}
+
+	.btnGroup {
+		display: flex !important;
+		align-items: center;
+	}
+
+	.menuItems {
+		display: inline-flex !important;
+		margin: 5px 40px 0 40px !important;
+		border-top: 1px dotted !important;
+		width: calc(100% - 40px);
 	}
 }
