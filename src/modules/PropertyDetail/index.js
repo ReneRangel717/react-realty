@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Container, Segment, Label, Image, Item, Grid } from 'semantic-ui-react';
+
 import Helmet from 'react-helmet';
 
 import ImageCarousel from 'components/ImageCarousel';
@@ -9,6 +10,8 @@ import getSiteUrl from 'utils/getSiteUrl';
 import getImageUrl from 'utils/getImageUrl';
 import actions from './redux/actions';
 import selectors from './redux/selectors';
+
+import styles from './styles.scss';
 
 class PropertyDetail extends Component {
   componentWillMount() {
@@ -31,7 +34,16 @@ class PropertyDetail extends Component {
       remarks,
       mlsid,
       piccount,
+      status,
+      state,
+      zip,
+      price,
+      beds,
+      baths_full,
+      sqft
     } = property;
+
+    console.log(property);
 
     return (
       <Container>
@@ -49,9 +61,43 @@ class PropertyDetail extends Component {
           <meta property="og:locality" content={community} />
           <meta property="og:region" content={city} />
         </Helmet>
-        <Header as="h2">{address}</Header>
-        <p>{remarks}</p>
-        <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />
+        <Segment raised>
+          <Label as="a" color="red" ribbon>Just Listed</Label>
+          <Header className={styles.header}>
+            <Grid>
+              <Grid.Column width={7} className={styles.address} verticalAlign="middle">
+                <Item>
+                  <Item.Image size="tiny" src="/assets/images/image1.png" centered />
+                  <Item.Content>
+                    <Item.Header as="h2" className={styles.title}>{address}</Item.Header>
+                    <Item.Meta as="h6" className={styles.description}>{city}, {state} {zip}</Item.Meta>
+                    <Item.Description as="h6" className={styles.description}>
+                      Status: {status}
+                    </Item.Description>
+                  </Item.Content>
+                </Item>
+              </Grid.Column>
+              <Grid.Column width={6} className={styles.details} textAlign="center">
+                <Segment basic as="span">
+                  <strong>${price}</strong> <br></br> Listed at Price
+                </Segment>
+                <Segment basic as="span">
+                  <strong>{beds}</strong> <br></br> Beds
+                </Segment>
+                <Segment basic as="span">
+                  <strong>{baths_full.toString()}</strong> <br></br> Baths
+                </Segment>
+                <Segment basic as="span">
+                  <strong>{sqft}</strong> Sq.Ft <br></br> $128/Sq.Ft
+                </Segment>
+              </Grid.Column>
+              <Grid.Column width={3}>
+              </Grid.Column>
+            </Grid>
+          </Header>
+          <p>{remarks}</p>
+          <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />
+        </Segment>
       </Container>
     );
   }

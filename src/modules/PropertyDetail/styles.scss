@@ -1,0 +1,40 @@
+.page_container {
+	display: block;
+}
+
+.header {
+	* {
+		font-weight: normal;
+	}
+
+	strong {
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	.address {
+		padding: 13px 0 !important;
+
+		img {
+			float: right;
+			margin-right: 10px;
+		}
+	}
+
+	background: #eee;
+	margin: 10px 0 !important;
+	padding: 20px 30px !important;
+
+	.description, .title {
+		margin: 0px;
+	}
+
+	.details > span {
+		display: inline-block;
+		font-weight: normal;
+
+		&:not(:first-child) {
+			border-left: 1px solid #ddd;
+		}
+	}
+}
