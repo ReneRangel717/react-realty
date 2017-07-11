@@ -21,6 +21,27 @@ export function loadAgentDetailError(error) {
   };
 }
 
+export function loadAgentReviewsRequest(username) {
+  return {
+    type: CONSTANTS.LOAD_AGENT_REVIEWS_REQUEST,
+    username
+  };
+}
+
+export function loadAgentReviewsSuccess(reviews) {
+  return {
+    type: CONSTANTS.LOAD_AGENT_REVIEWS_SUCCESS,
+    reviews
+  };
+}
+
+export function loadAgentReviewsError(error) {
+  return {
+    type: CONSTANTS.LOAD_AGENT_REVIEWS_ERROR,
+    error
+  };
+}
+
 export function setUsername(username) {
   return {
     type: CONSTANTS.SET_USERNAME,
@@ -39,6 +60,9 @@ export default {
   loadAgentDetailRequest,
   loadAgentDetailSuccess,
   loadAgentDetailError,
+  loadAgentReviewsRequest,
+  loadAgentReviewsSuccess,
+  loadAgentReviewsError,
   setUsername,
   setLoading
 };
