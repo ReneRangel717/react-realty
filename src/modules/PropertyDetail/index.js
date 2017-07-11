@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Header, Container, Segment, Label, Image, Item, Grid, Button, Menu } from 'semantic-ui-react';
+import { Container, Segment, Label } from 'semantic-ui-react';
 
 import Helmet from 'react-helmet';
 
@@ -12,6 +12,8 @@ import actions from './redux/actions';
 import selectors from './redux/selectors';
 
 import styles from './styles.scss';
+
+import PropertyHeader from './components/header';
 
 class PropertyDetail extends Component {
   componentWillMount() {
@@ -33,15 +35,10 @@ class PropertyDetail extends Component {
       address,
       remarks,
       mlsid,
-      piccount,
-      status,
-      state,
-      zip,
-      price,
-      beds,
-      baths_full,
-      sqft
+      piccount
     } = property;
+
+    console.log(property, mlsid, piccount);
 
     return (
       <Container>
@@ -61,52 +58,7 @@ class PropertyDetail extends Component {
         </Helmet>
         <Segment raised className={styles.mainSegment}>
           <Label as="a" color="red" ribbon>Just Listed</Label>
-          <Header className={styles.header}>
-            <Grid>
-              <Grid.Column width={7} className={styles.address} verticalAlign="middle">
-                <Item>
-                  <Item.Image size="tiny" src="/assets/images/image1.png" centered />
-                  <Item.Content>
-                    <Item.Header as="h2" className={styles.title}>{address}</Item.Header>
-                    <Item.Meta as="h6" className={styles.description}>{city}, {state} {zip}</Item.Meta>
-                    <Item.Description as="h6" className={styles.description}>
-                      Status: {status}
-                    </Item.Description>
-                  </Item.Content>
-                </Item>
-              </Grid.Column>
-              <Grid.Column width={6} className={styles.details} textAlign="center">
-                <Segment basic as="span">
-                  <strong>${price}</strong> <br></br> Listed at Price
-                </Segment>
-                <Segment basic as="span">
-                  <strong>{beds}</strong> <br></br> Beds
-                </Segment>
-                <Segment basic as="span">
-                  <strong>{baths_full.toString()}</strong> <br></br> Baths
-                </Segment>
-                <Segment basic as="span">
-                  <strong>{sqft}</strong> Sq.Ft <br></br> $128/Sq.Ft
-                </Segment>
-              </Grid.Column>
-              <Grid.Column width={3} className={styles.btnGroup}>
-                <Button basic icon="heart" content="" />
-                <Button basic icon="close" content="" />
-                <Button basic icon="share" content="" />
-              </Grid.Column>
-            </Grid>
-            <Menu text className={styles.menuItems}>
-              <Menu.Item name="Overview" />
-              <Menu.Item name="Property Details" />
-              <Menu.Item name="Tour Insights" />
-              <Menu.Item name="Redfin Estimate" />
-              <Menu.Item name="Property History" />
-              <Menu.Item name="Public Facts" />
-              <Menu.Item name="Schools" />
-              <Menu.Item name="Neighborhood" />
-              <Menu.Item name="Similar Homes" />
-            </Menu>
-          </Header>
+          <PropertyHeader styles={styles} property={property} />
           <p>{remarks}</p>
           <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />
         </Segment>
