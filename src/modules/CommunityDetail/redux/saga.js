@@ -15,7 +15,7 @@ export function* loadCommunityDetailRequest({ slug }) {
     const currentSlug = selectors.selectSlug(state);
 
     if (currentSlug !== slug) {
-      const data = yield call(api.callMongoAPI.bind(null, 'community', slug));
+      const data = yield call(api.callMongoAPI.bind(null, 'community', { slug }));
       yield put(actions.loadCommunityDetailSuccess(data.response));
       yield put(actions.setSlug(slug));
     }

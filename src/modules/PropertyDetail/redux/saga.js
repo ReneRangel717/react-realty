@@ -15,7 +15,7 @@ export function* loadPropertyDetailRequest({ slug }) {
     const currentSlug = selectors.selectSlug(state);
 
     if (currentSlug !== slug) {
-      const data = yield call(api.callMongoAPI.bind(null, 'property', slug));
+      const data = yield call(api.callMongoAPI.bind(null, 'property', { slug }));
       yield put(actions.loadPropertyDetailSuccess(data.response));
       yield put(actions.setSlug(slug));
     }

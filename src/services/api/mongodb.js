@@ -3,8 +3,8 @@ import queryString from 'query-string';
 import config from 'config';
 import { MONGO_API_PATH } from 'constants/api';
 
-export function callMongoAPI(endpoint, slug) {
-  const query = queryString.stringify({ slug });
+export function callMongoAPI(endpoint, queryObj = {}) {
+  const query = queryString.stringify(queryObj);
   let fullUrl = `${MONGO_API_PATH}/${endpoint}?${query}`;
   if (__SERVER__) {
     fullUrl = (fullUrl.indexOf(config.apiBaseUrl) === -1) ? `${config.apiBaseUrl}${fullUrl}` : fullUrl;

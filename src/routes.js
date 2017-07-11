@@ -18,7 +18,7 @@ export default () => {
       <IndexRoute component={HomePage} />
       <Route path="/home" component={Search} />
       <Route path="/realtors">
-        <Route path=":agent" component={AgentDetail} />
+        <Route path=":username" component={AgentDetail} />
       </Route>
       <Route path="/:city">
         <IndexRoute component={PropertySearch} />
