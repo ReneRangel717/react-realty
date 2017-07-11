@@ -103,6 +103,7 @@
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "slick-carousel": "^1.6.0",
+    "react-image-gallery": "^0.8.3",
     "url-loader": "^0.5.7",
     "warning": "^3.0.0",
     "webpack-isomorphic-tools": "^3.0.2"

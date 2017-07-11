@@ -4,7 +4,6 @@ import { Container, Segment, Label } from 'semantic-ui-react';
 
 import Helmet from 'react-helmet';
 
-import ImageCarousel from 'components/ImageCarousel';
 import Loader from 'components/Loader';
 import getSiteUrl from 'utils/getSiteUrl';
 import getImageUrl from 'utils/getImageUrl';
@@ -14,6 +13,7 @@ import selectors from './redux/selectors';
 import styles from './styles.scss';
 
 import PropertyHeader from './components/header';
+import ImageSlider from './components/ImageSlider';
 
 class PropertyDetail extends Component {
   componentWillMount() {
@@ -60,7 +60,7 @@ class PropertyDetail extends Component {
           <Label as="a" color="red" ribbon>Just Listed</Label>
           <PropertyHeader styles={styles} property={property} />
           <p>{remarks}</p>
-          <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />
+          <ImageSlider id={mlsid} picCount={piccount} size="original" />
         </Segment>
       </Container>
     );
