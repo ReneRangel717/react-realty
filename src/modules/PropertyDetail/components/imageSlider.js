@@ -4,9 +4,6 @@ import ImageGallery from 'react-image-gallery';
 import { getImageUrl } from 'utils';
 
 class ImageSlider extends Component {
-  handleImageLoad(event) {
-    console.log('Image loaded ', event.target);
-  }
 
   render() {
     const { id, picCount, size } = this.props;
@@ -18,7 +15,7 @@ class ImageSlider extends Component {
     ));
 
     return (
-      <ImageGallery items={images} slideInterval={2000} onImageLoad={this.handleImageLoad} />
+      <ImageGallery items={images} slideInterval={2000} />
     );
   }
 }
