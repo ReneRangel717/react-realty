@@ -20,7 +20,8 @@ module.exports = {
       './src/client.js',
       'slick-carousel/slick/slick.css',
       'slick-carousel/slick/slick-theme.css',
-      'semantic-ui-css/semantic.min.css'
+      'semantic-ui-css/semantic.min.css',
+      'react-image-gallery/styles/css/image-gallery.css'
     ]
   },
   output: {

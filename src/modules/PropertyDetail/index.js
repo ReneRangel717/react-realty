@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Header, Container } from 'semantic-ui-react';
+import { Container, Segment, Label } from 'semantic-ui-react';
+
 import Helmet from 'react-helmet';
 
-import ImageCarousel from 'components/ImageCarousel';
 import Loader from 'components/Loader';
 import getSiteUrl from 'utils/getSiteUrl';
 import getImageUrl from 'utils/getImageUrl';
 import actions from './redux/actions';
 import selectors from './redux/selectors';
+
+import styles from './styles.scss';
+
+import PropertyHeader from './components/header';
+import ImageCarousel from './components/ImageCarousel';
 
 class PropertyDetail extends Component {
   componentWillMount() {
@@ -30,8 +35,10 @@ class PropertyDetail extends Component {
       address,
       remarks,
       mlsid,
-      piccount,
+      piccount
     } = property;
+
+    console.log(property, mlsid, piccount);
 
     return (
       <Container>
@@ -49,9 +56,12 @@ class PropertyDetail extends Component {
           <meta property="og:locality" content={community} />
           <meta property="og:region" content={city} />
         </Helmet>
-        <Header as="h2">{address}</Header>
-        <p>{remarks}</p>
-        <ImageCarousel id={mlsid} picCount={piccount} size="original" shortcut />
+        <Segment raised className={styles.mainSegment}>
+          <Label as="a" color="red" ribbon>Just Listed</Label>
+          <PropertyHeader styles={styles} property={property} />
+          <p>{remarks}</p>
+          <ImageCarousel id={mlsid} picCount={piccount} size="original" />
+        </Segment>
       </Container>
     );
   }
