@@ -1,30 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Menu, Button } from 'semantic-ui-react';
+import { Grid, Menu, Button } from 'semantic-ui-react';
 
 import SearchInput from 'modules/Search/components/SearchInput';
 import PriceFilter from 'modules/Search/components/PriceFilter';
 import TypeFilter from 'modules/Search/components/TypeFilter';
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
+import styles from './styles.scss';
 
 class SearchToolBar extends Component {
   render() {
     return (
-      <Menu>
-        <Menu.Item>
-          <SearchInput />
-        </Menu.Item>
-        <Menu.Item>
-          <PriceFilter />
-        </Menu.Item>
-        <Menu.Item>
-          <TypeFilter />
-        </Menu.Item>
-        <Menu.Item position="right">
-          <Button onClick={this.props.toggleSidebar}>Toggle</Button>
-        </Menu.Item>
-      </Menu>
+      <Grid>
+        <Grid.Row only="computer tablet" as={Menu} className={styles.gridRow}>
+          <Menu.Item>
+            <SearchInput />
+          </Menu.Item>
+          <Menu.Item>
+            <PriceFilter />
+          </Menu.Item>
+          <Menu.Item>
+            <TypeFilter />
+          </Menu.Item>
+        </Grid.Row>
+        <Grid.Row only="mobile" as={Menu} className={styles.gridRow}>
+          <Menu.Item>
+            <Button>Filters</Button>
+          </Menu.Item>
+          <Menu.Item position="right">
+            <Button.Group>
+              <Button onClick={() => this.props.toggleSidebar(false)}>Map</Button>
+              <Button.Or />
+              <Button positive onClick={() => this.props.toggleSidebar(true)}>List</Button>
+            </Button.Group>
+          </Menu.Item>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
@@ -40,7 +52,7 @@ const mapStatesToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleSidebar: () => dispatch(actions.toggleSidebar()),
+  toggleSidebar: (value) => dispatch(actions.toggleSidebar(value)),
   setFilter: (filterName, filter) => dispatch(actions.setFilter(filterName, filter)),
 });
 

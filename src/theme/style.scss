@@ -67,3 +67,19 @@ body {
   margin: 0;
   padding: 0;
 }
+
+// overriding semantic ui
+:global {
+  .ui.container {
+    margin-left: 0!important;
+    margin-right: 0!important;
+  }
+
+  .ui.grid, .ui.grid>.column:not(.row) {
+    padding: 0!important;
+  }
+
+  .ui.grid {
+    margin: 0;
+  }
+}

@@ -1,17 +1,8 @@
-:global {
-  .ui.container {
-    margin-left: 0!important;
-    margin-right: 0!important;
-  }
-
-  .ui.grid, .ui.grid>.column:not(.row) {
-    padding: 0!important;
-  }
-}
 
 .flexContainer {
   display: flex!important;
   flex-flow: column;
+  width: 100%;
 }
 
 .flexRow {
@@ -27,4 +18,15 @@
 
 .mapColumn {
   height: 100%;
+}
+
+.sidebar {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    display: block;
+    width: 100%!important;
+  }
 }

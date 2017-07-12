@@ -100,9 +100,10 @@ export function setFilter(filterName, filter, silent = false) {
   };
 }
 
-export function toggleSidebar() {
+export function toggleSidebar(toggle) {
   return {
-    type: CONSTANTS.TOGGLE_SIDEBAR
+    type: CONSTANTS.TOGGLE_SIDEBAR,
+    toggle
   };
 }
 

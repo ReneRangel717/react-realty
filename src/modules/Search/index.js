@@ -20,32 +20,32 @@ class PropertySearch extends Component {
 
   render() {
     return (
-      <Container fluid className={styles.flexContainer}>
+      <div className={styles.flexContainer}>
         <SearchToolBar />
         <Container fluid className={styles.flexRow}>
           <Sidebar.Pushable>
             <Sidebar
-              animation="push"
+              animation="overlay"
               width="wide"
               direction="right"
               visible={this.props.sidebar}
-              style={{ width: '100%' }}
+              className={styles.sidebar}
             >
               <PropertyTable />
             </Sidebar>
             <Sidebar.Pusher style={{ height: '100%' }}>
               <Grid style={{ height: '100%' }}>
-                <Grid.Column width={16} computer={12} className={cx('mapContainer', styles.mapColumn)}>
+                <Grid.Column width={16} computer={12} tablet={10} className={cx('mapContainer', styles.mapColumn)}>
                   <PropertyMap />
                 </Grid.Column>
-                <Grid.Column computer={4} only="computer" className={styles.tableColumn}>
+                <Grid.Column computer={4} tablet={6} only="computer tablet" className={styles.tableColumn}>
                   <PropertyTable />
                 </Grid.Column>
               </Grid>
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </Container>
-      </Container>
+      </div>
     );
   }
 }

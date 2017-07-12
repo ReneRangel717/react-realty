@@ -26,7 +26,7 @@ const initialState = fromJS({
     center: [26.3683064, -80.1289321],
     zoom: 9,
   },
-  sidebar: false,
+  sidebar: true,
   infoBoxIndex: -1, // info box displayed
   hoverIndex: -1, // only hover in table
   hoverState: false, // false: hover, true: brief info
@@ -66,7 +66,7 @@ function searchReducer(state = initialState, action) {
     case CONSTANTS.ES_AGENT_SEARCH_SUCCESS:
       return state.set('agents', fromJS(action.response.data));
     case CONSTANTS.TOGGLE_SIDEBAR:
-      return state.set('sidebar', !state.get('sidebar'));
+      return state.set('sidebar', typeof action.toggle === 'undefined' ? !state.get('sidebar') : action.toggle);
     default:
   }
   return state;
