@@ -70,16 +70,18 @@ body {
 
 // overriding semantic ui
 :global {
-  .ui.container {
-    margin-left: 0!important;
-    margin-right: 0!important;
-  }
+  body {
+    .ui.container {
+      margin-left: 0!important;
+      margin-right: 0!important;
+    }
 
-  .ui.grid, .ui.grid>.column:not(.row) {
-    padding: 0!important;
-  }
+    .ui.grid, .ui.grid>.column:not(.row) {
+      padding: 0!important;
+    }
 
-  .ui.grid {
-    margin: 0;
+    .ui.grid {
+      margin: 0;
+    }
   }
 }
