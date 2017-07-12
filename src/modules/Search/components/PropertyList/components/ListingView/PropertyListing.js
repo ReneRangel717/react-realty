@@ -5,9 +5,9 @@ import { Card, Image } from 'semantic-ui-react';
 import { getImageUrl } from 'utils';
 import ImageCarousel from 'components/ImageCarousel';
 
-import styles from './styles/row.scss';
+import styles from './styles/listing.scss';
 
-class TableRow extends Component {
+class PropertyListing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +60,7 @@ class TableRow extends Component {
   }
 }
 
-TableRow.propTypes = {
+PropertyListing.propTypes = {
   data: PropTypes.any,
   hoverState: PropTypes.bool.isRequired,
   onHover: PropTypes.func.isRequired,
@@ -68,4 +68,4 @@ TableRow.propTypes = {
   onClick: PropTypes.func.isRequired
 };
 
-export default TableRow;
+export default PropertyListing;

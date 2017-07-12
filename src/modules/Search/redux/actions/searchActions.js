@@ -84,29 +84,6 @@ export function esCommunitySearchError(error) {
   };
 }
 
-export function setSearching(searching) {
-  return {
-    type: CONSTANTS.SET_SEARCHING,
-    searching
-  };
-}
-
-export function setFilter(filterName, filter, silent = false) {
-  return {
-    type: CONSTANTS.SET_FILTER,
-    filterName,
-    filter,
-    silent
-  };
-}
-
-export function toggleSidebar(toggle) {
-  return {
-    type: CONSTANTS.TOGGLE_SIDEBAR,
-    toggle
-  };
-}
-
 export default {
   esPropertySearchRequest,
   esPropertySearchSuccess,
@@ -119,8 +96,5 @@ export default {
   esCommunitySearchError,
   esAgentSearchRequest,
   esAgentSearchSuccess,
-  esAgentSearchError,
-  setSearching,
-  setFilter,
-  toggleSidebar
+  esAgentSearchError
 };

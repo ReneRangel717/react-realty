@@ -15,9 +15,12 @@ export const ES_AGENT_SEARCH_REQUEST = 'search/es_agent_search_request';
 export const ES_AGENT_SEARCH_SUCCESS = 'search/es_agent_search_success';
 export const ES_AGENT_SEARCH_ERROR = 'search/es_agent_search_error';
 
+// other actions
 export const SET_FILTER = 'search/set_filter';
 export const SET_SEARCHING = 'search/set_searching';
 export const TOGGLE_SIDEBAR = 'search/toggle_sidebar';
+export const SET_LISTING_VIEW = 'search/set_listing_view';
+export const SET_SORT = 'search/set_sort';
 
 // map actions
 export const SEARCH_BOUNDS_CHANGE = 'search/bounds_change'; // this includes bound, marginbound, center, zoom change

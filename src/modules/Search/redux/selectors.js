@@ -42,6 +42,16 @@ const selectSidebar = createSelector(
   (substate) => substate.get('sidebar')
 );
 
+const selectSort = createSelector(
+  selectModule,
+  (substate) => substate.get('sort')
+);
+
+const selectView = createSelector(
+  selectModule,
+  (substate) => substate.get('view')
+);
+
 const selectPath = (state) => state.get('route').get('locationBeforeTransitions').pathname;
 
 export default {
@@ -54,5 +64,7 @@ export default {
   selectSearching,
   selectMapInfo,
   selectSidebar,
-  selectPath
+  selectPath,
+  selectSort,
+  selectView
 };

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import actions from 'modules/Search/redux/actions';
 import selectors from 'modules/Search/redux/selectors';
-import styles from './styles/table.scss';
-import TableRow from './TableRow';
+import styles from './styles/listing-view.scss';
+import PropertyListing from './PropertyListing';
 
-class PropertyTable extends Component {
+class PropertyListingView extends Component {
   _onHoverRow = (_id) => () =>
     this.props.mapToggleHoverIndex(_id)
 
@@ -14,12 +14,12 @@ class PropertyTable extends Component {
     this.props.mapToggleInfobox(_id)
 
   // @TODO simulate infinite loading by storing endpos in state after API load
-  renderTableRows = () => {
+  renderPropertyListings = () => {
     const { markers } = this.props;
     return markers.map((marker) => {
       const id = marker.get('_id');
       return (
-        <TableRow
+        <PropertyListing
           key={`${id}`}
           id={id}
           data={marker}
@@ -35,14 +35,14 @@ class PropertyTable extends Component {
   render() {
     return (
       <div className={styles.tableHolder}>
-        {this.renderTableRows()}
+        {this.renderPropertyListings()}
       </div>
     );
   }
 }
 
 
-PropertyTable.propTypes = {
+PropertyListingView.propTypes = {
   markers: PropTypes.any.isRequired,
   hoverState: PropTypes.bool.isRequired,
   hoverIndex: PropTypes.any.isRequired,
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
   mapToggleInfobox: (markerIndex) => dispatch(actions.mapToggleInfobox(markerIndex))
 });
 
-export default connect(mapStatesToProps, mapDispatchToProps)(PropertyTable);
+export default connect(mapStatesToProps, mapDispatchToProps)(PropertyListingView);

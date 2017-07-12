@@ -5,7 +5,7 @@ import { Sidebar, Container, Grid } from 'semantic-ui-react';
 
 import SearchToolBar from './components/SearchToolBar';
 import PropertyMap from './components/PropertyMap';
-import PropertyTable from './components/PropertyTable';
+import PropertyList from './components/PropertyList';
 import actions from './redux/actions';
 import selectors from './redux/selectors';
 import styles from './styles.scss';
@@ -31,15 +31,15 @@ class PropertySearch extends Component {
               visible={this.props.sidebar}
               className={styles.sidebar}
             >
-              <PropertyTable />
+              <PropertyList />
             </Sidebar>
             <Sidebar.Pusher style={{ height: '100%' }}>
               <Grid style={{ height: '100%' }}>
-                <Grid.Column width={16} computer={12} tablet={10} className={cx('mapContainer', styles.mapColumn)}>
+                <Grid.Column width={16} computer={10} tablet={8} className={cx('mapContainer', styles.mapColumn)}>
                   <PropertyMap />
                 </Grid.Column>
-                <Grid.Column computer={4} tablet={6} only="computer tablet" className={styles.tableColumn}>
-                  <PropertyTable />
+                <Grid.Column computer={6} tablet={8} only="computer tablet" className={styles.tableColumn}>
+                  <PropertyList />
                 </Grid.Column>
               </Grid>
             </Sidebar.Pusher>

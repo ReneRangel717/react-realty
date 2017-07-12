@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as CONSTANTS from '../constants';
+import sortReducer from './sortReducer';
 
 const initialState = fromJS({
   filters: {
@@ -27,6 +28,8 @@ const initialState = fromJS({
     zoom: 9,
   },
   sidebar: true,
+  view: 'table',
+  sort: [],
   infoBoxIndex: -1, // info box displayed
   hoverIndex: -1, // only hover in table
   hoverState: false, // false: hover, true: brief info
@@ -67,6 +70,10 @@ function searchReducer(state = initialState, action) {
       return state.set('agents', fromJS(action.response.data));
     case CONSTANTS.TOGGLE_SIDEBAR:
       return state.set('sidebar', typeof action.toggle === 'undefined' ? !state.get('sidebar') : action.toggle);
+    case CONSTANTS.SET_LISTING_VIEW:
+      return state.set('view', action.view);
+    case CONSTANTS.SET_SORT:
+      return sortReducer(state, action);
     default:
   }
   return state;
